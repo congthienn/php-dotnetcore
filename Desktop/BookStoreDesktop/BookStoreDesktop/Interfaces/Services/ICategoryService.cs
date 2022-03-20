@@ -15,5 +15,7 @@ namespace BookStoreDesktop.Interfaces
         bool UpdateCategory(CategoryDTO categoryDTO,int id);
         List<Category> GetCategoryByName(string name);
         bool DeleteCategory(int id);
+        Category GetItemCategory(int id);
+        void UpdateQuantity(Category category);
     }
 }

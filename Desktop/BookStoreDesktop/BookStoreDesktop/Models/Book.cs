@@ -20,6 +20,7 @@ namespace BookStoreDesktop.Models
         }
     }
     [Index(nameof(Book.Name),IsUnique = true)]
+    [Table("Books")]
     public class Book
     {
         [Key]
@@ -36,10 +37,26 @@ namespace BookStoreDesktop.Models
         public int Sold { get; set; }
         [Required]
         [Unicode(false),MaxLength(255)]
+        [Column(TypeName = "nvarchar(255)")]
         public string Author { get; set; }
         [Column("Create_at")]
         public DateTime TimeCreate { get; set; } = DateTime.Now;
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
+        public Image Picture
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(ImgPath))
+                {
+                    if (File.Exists(ImgPath))
+                    {
+                        return Image.FromFile(ImgPath);
+                    }
+                    return null;
+                }
+                return null;
+            }
+        }
     }
     public class BookDTO
     {

@@ -28,25 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSrearch = new System.Windows.Forms.TextBox();
             this.labelSearch = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.dataRole = new System.Windows.Forms.DataGridView();
-            this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataBook = new System.Windows.Forms.DataGridView();
+            this.bookBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.bookBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.selectCategory = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataRole)).BeginInit();
+            this.bookBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnDetail = new System.Windows.Forms.Button();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.soldDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataBook)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -89,6 +102,7 @@
             this.btnDelete.TabIndex = 28;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -100,6 +114,7 @@
             this.btnUpdate.TabIndex = 27;
             this.btnUpdate.Text = "Chỉnh sửa";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
@@ -113,11 +128,12 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // dataRole
+            // dataBook
             // 
-            this.dataRole.AllowUserToAddRows = false;
-            this.dataRole.AllowUserToDeleteRows = false;
-            this.dataRole.BackgroundColor = System.Drawing.Color.White;
+            this.dataBook.AllowUserToAddRows = false;
+            this.dataBook.AllowUserToDeleteRows = false;
+            this.dataBook.AutoGenerateColumns = false;
+            this.dataBook.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -125,65 +141,34 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataRole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataRole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataRole.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
-            this.colName,
-            this.colQuantity,
-            this.colTime});
-            this.dataRole.Location = new System.Drawing.Point(36, 226);
-            this.dataRole.Name = "dataRole";
-            this.dataRole.ReadOnly = true;
-            this.dataRole.RowHeadersWidth = 51;
-            this.dataRole.RowTemplate.Height = 29;
-            this.dataRole.Size = new System.Drawing.Size(1070, 412);
-            this.dataRole.TabIndex = 25;
+            this.dataBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataBook.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.pictureDataGridViewImageColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.priceDataGridViewTextBoxColumn,
+            this.quantityDataGridViewTextBoxColumn,
+            this.soldDataGridViewTextBoxColumn,
+            this.authorDataGridViewTextBoxColumn});
+            this.dataBook.DataSource = this.bookBindingSource2;
+            this.dataBook.Location = new System.Drawing.Point(36, 226);
+            this.dataBook.Name = "dataBook";
+            this.dataBook.ReadOnly = true;
+            this.dataBook.RowHeadersWidth = 51;
+            this.dataBook.RowTemplate.Height = 100;
+            this.dataBook.Size = new System.Drawing.Size(1070, 412);
+            this.dataBook.TabIndex = 25;
+            this.dataBook.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataBook_CellContentClick);
+            this.dataBook.SelectionChanged += new System.EventHandler(this.dataBook_SelectionChanged);
             // 
-            // colId
+            // bookBindingSource2
             // 
-            this.colId.DataPropertyName = "Id";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.colId.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colId.HeaderText = "Mã chức vụ";
-            this.colId.MinimumWidth = 6;
-            this.colId.Name = "colId";
-            this.colId.ReadOnly = true;
-            this.colId.Width = 180;
+            this.bookBindingSource2.DataSource = typeof(BookStoreDesktop.Models.Book);
             // 
-            // colName
+            // bookBindingSource1
             // 
-            this.colName.DataPropertyName = "Name";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.colName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colName.HeaderText = "Tên chức vụ";
-            this.colName.MinimumWidth = 6;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 350;
-            // 
-            // colQuantity
-            // 
-            this.colQuantity.DataPropertyName = "Quantity";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.colQuantity.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colQuantity.HeaderText = "Số lượng nhân viên";
-            this.colQuantity.MinimumWidth = 6;
-            this.colQuantity.Name = "colQuantity";
-            this.colQuantity.ReadOnly = true;
-            this.colQuantity.Width = 220;
-            // 
-            // colTime
-            // 
-            this.colTime.DataPropertyName = "TimeCreate";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.colTime.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colTime.HeaderText = "Thời gian cập nhật";
-            this.colTime.MinimumWidth = 6;
-            this.colTime.Name = "colTime";
-            this.colTime.ReadOnly = true;
-            this.colTime.Width = 267;
+            this.bookBindingSource1.DataSource = typeof(BookStoreDesktop.Models.Book);
             // 
             // selectCategory
             // 
@@ -208,11 +193,104 @@
             this.label2.TabIndex = 36;
             this.label2.Text = "Tìm kiếm sách";
             // 
+            // bookBindingSource
+            // 
+            this.bookBindingSource.DataSource = typeof(BookStoreDesktop.Models.Book);
+            // 
+            // btnDetail
+            // 
+            this.btnDetail.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDetail.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnDetail.Location = new System.Drawing.Point(985, 166);
+            this.btnDetail.Name = "btnDetail";
+            this.btnDetail.Size = new System.Drawing.Size(121, 39);
+            this.btnDetail.TabIndex = 37;
+            this.btnDetail.Text = "Chi tiết";
+            this.btnDetail.UseVisualStyleBackColor = true;
+            this.btnDetail.Click += new System.EventHandler(this.btnDetail_Click);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.idDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.idDataGridViewTextBoxColumn.HeaderText = "Mã sách";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pictureDataGridViewImageColumn
+            // 
+            this.pictureDataGridViewImageColumn.DataPropertyName = "Picture";
+            this.pictureDataGridViewImageColumn.HeaderText = "Hình ảnh";
+            this.pictureDataGridViewImageColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.pictureDataGridViewImageColumn.MinimumWidth = 6;
+            this.pictureDataGridViewImageColumn.Name = "pictureDataGridViewImageColumn";
+            this.pictureDataGridViewImageColumn.ReadOnly = true;
+            this.pictureDataGridViewImageColumn.Width = 120;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.nameDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Tên sách";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 350;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Giá bán";
+            this.priceDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.priceDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.quantityDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "SL tổng";
+            this.quantityDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            this.quantityDataGridViewTextBoxColumn.ReadOnly = true;
+            this.quantityDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // soldDataGridViewTextBoxColumn
+            // 
+            this.soldDataGridViewTextBoxColumn.DataPropertyName = "Sold";
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.soldDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.soldDataGridViewTextBoxColumn.HeaderText = "Đã bán";
+            this.soldDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.soldDataGridViewTextBoxColumn.Name = "soldDataGridViewTextBoxColumn";
+            this.soldDataGridViewTextBoxColumn.ReadOnly = true;
+            this.soldDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // authorDataGridViewTextBoxColumn
+            // 
+            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.authorDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.authorDataGridViewTextBoxColumn.HeaderText = "Nhà xuất bản";
+            this.authorDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+            this.authorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.authorDataGridViewTextBoxColumn.Width = 250;
+            // 
             // ContainerBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 706);
+            this.Controls.Add(this.btnDetail);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.selectCategory);
             this.Controls.Add(this.label1);
@@ -221,12 +299,15 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.dataRole);
+            this.Controls.Add(this.dataBook);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ContainerBook";
             this.Text = "ContainerBook";
             this.Load += new System.EventHandler(this.ContainerBook_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataBook)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,13 +320,20 @@
         private Label labelSearch;
         private Button btnDelete;
         private Button btnUpdate;
-        private Button btnAdd;
-        private DataGridView dataRole;
-        private DataGridViewTextBoxColumn colId;
-        private DataGridViewTextBoxColumn colName;
-        private DataGridViewTextBoxColumn colQuantity;
-        private DataGridViewTextBoxColumn colTime;
+        public Button btnAdd;
+        public DataGridView dataBook;
         private ComboBox selectCategory;
         private Label label2;
+        private BindingSource bookBindingSource1;
+        private BindingSource bookBindingSource;
+        private BindingSource bookBindingSource2;
+        public Button btnDetail;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewImageColumn pictureDataGridViewImageColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn soldDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
     }
 }

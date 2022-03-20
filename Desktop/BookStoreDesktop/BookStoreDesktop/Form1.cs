@@ -5,18 +5,22 @@ using AutoMapper;
 using BookStoreDesktop.BookStoreDatabase;
 using BookStoreDesktop.Models;
 using BookStoreDesktop.Datatable;
+using BookStoreDesktop.Automapper;
+using BookStoreDesktop.Interfaces.Services;
 
 namespace BookStoreDesktop
 {
     public partial class Form1 : Form
     {
         private readonly ICategoryService _categoryService;
+        private readonly IBookService _bookService;
         public string flag;
         public int index;
         public Form1()
         {
             InitializeComponent();
             this._categoryService = AutofacInstance.GetInstance<ICategoryService>();
+            this._bookService = AutofacInstance.GetInstance<IBookService>();
         }
         public void LockControll()
         {
@@ -26,7 +30,6 @@ namespace BookStoreDesktop
             btnCancel.Enabled = false;
             btnSave.Enabled = false;
             btnUpdate.Enabled = true;
-            btnDelete.Enabled = false;
             btnDelete.Enabled = true;
             txtName.Text = null;
             btnAdd.Focus();
@@ -52,7 +55,13 @@ namespace BookStoreDesktop
         public void LoadData()
         {
             List<Category> listCategory = this._categoryService.GetAllCategory();
-            dataCategory.DataSource = ConvertDataTable.ToDataTable<Category>(listCategory);
+            if(listCategory.Count == 0)
+            {
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+                btnAdd.Focus();
+            }
+            dataCategory.DataSource = listCategory;
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -128,9 +137,14 @@ namespace BookStoreDesktop
         {
             if(MessageBox.Show("Bạn có muốn xóa loại sản phẩm này?","Cảnh báo",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                
                 int Id = Convert.ToInt32(dataCategory.Rows[index].Cells[0].Value.ToString());
-                this._categoryService.DeleteCategory(Id);
-                LoadData();
+                bool checkCategoryId = this._bookService.CheckCategoryId(Id);
+                if (checkCategoryId)
+                {
+                    this._categoryService.DeleteCategory(Id);
+                    LoadData();
+                }
             }
         }
         private void dataCategory_SelectionChanged(object sender, EventArgs e)
@@ -138,7 +152,7 @@ namespace BookStoreDesktop
             if(dataCategory.CurrentCell != null)
             {
                 this.index = dataCategory.CurrentCell.RowIndex;
-            } 
+            }
         }
         private void txtSrearch_TextChanged(object sender, EventArgs e)
         {

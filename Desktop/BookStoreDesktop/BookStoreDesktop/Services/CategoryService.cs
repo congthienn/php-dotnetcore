@@ -50,6 +50,11 @@ namespace BookStoreDesktop.Services
             return this._categoryRepository.GetCategoryByName(name);
         }
 
+        public Category GetItemCategory(int id)
+        {
+            return this._categoryRepository.GetCategoroyById(id);
+        }
+
         public bool UpdateCategory(CategoryDTO categoryDTO, int id)
         {
             Category category = this._categoryRepository.GetCategoroyById(id);
@@ -64,6 +69,11 @@ namespace BookStoreDesktop.Services
                 this._categoryRepository.UpdateCategory(category);
                 return true;
             }
+        }
+
+        public void UpdateQuantity(Category category)
+        {
+            this._categoryRepository.UpdateCategory(category);
         }
     }
 }

@@ -16,5 +16,6 @@ namespace BookStoreDesktop.Interfaces.Repository
         Book ValidateName(string name,string id);
         List<Book> GetBookByName(string name);
         List<Book> GetBookByNameAndCategory(string name,int categoryID);
+        Book CheckCategoryId(int categoryID);
     }
 }

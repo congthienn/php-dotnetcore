@@ -17,6 +17,18 @@ namespace BookStoreDesktop.Services
         {
             this._bookRepository = AutofacInstance.GetInstance<IBookRepository>();
         }
+
+        public bool CheckCategoryId(int categoryId)
+        {
+            Book books = this._bookRepository.CheckCategoryId(categoryId);
+            if(books is null)
+            {
+                return true;
+            }
+            MessageBox.Show("Không thể xóa dữ liệu, có nhiều dữ liệu liên quan", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+
         public bool CreateBook(BookDTO book)
         {
             Book newBook = new Book();

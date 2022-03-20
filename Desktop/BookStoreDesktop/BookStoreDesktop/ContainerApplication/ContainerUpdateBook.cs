@@ -1,5 +1,4 @@
-﻿using BookStoreDesktop.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,30 +10,58 @@ using System.Windows.Forms;
 using BookStoreDesktop.Models;
 using BookStoreDesktop.Interfaces.Services;
 using BookStoreDesktop.Autofac;
-using BookStoreDesktop.Datatable;
+using BookStoreDesktop.Interfaces;
+
 namespace BookStoreDesktop.ContainerApplication
 {
-    public partial class ContainerAddBook : Form
+    public partial class ContainerUpdateBook : Form
     {
-        private readonly ICategoryService _categoryService;
-        private readonly IBookService _bookService;
+        private readonly string _id;
+        public string pathImg;
         private readonly ContainerBook _containerBook;
-        public string pathFile=null;
-        public ContainerAddBook(ContainerBook containerBook)
+        private readonly IBookService _bookService;
+        private readonly ICategoryService _categoryService;
+        public ContainerUpdateBook(string id,ContainerBook containerBook)
         {
             InitializeComponent();
-            this._categoryService = AutofacInstance.GetInstance<ICategoryService>();
-            this._bookService = AutofacInstance.GetInstance<IBookService>();
-            this._containerBook = containerBook;
+            _id = id;
+            _containerBook = containerBook;
+            _bookService = AutofacInstance.GetInstance<IBookService>();
+            _categoryService = AutofacInstance.GetInstance<ICategoryService>();
+        }
+        public void GetData()
+        {
+            Book book = this._bookService.GetBookById(_id);
+            txtName.Text = book.Name;
+            txtAuthor.Text = book.Author;
+            txtPrice.Value = book.Price;
+            txtQuantity.Value = book.Quantity;
+            OpenFileDialog open = new OpenFileDialog();
+            this.pathImg = book.ImgPath;
+            pictureBox1.Image = new Bitmap(book.ImgPath);
         }
         public void SelectCategory()
         {
+            Book book = this._bookService.GetBookById(_id);
             List<Category> listCategory = this._categoryService.GetAllCategory();
             Category fakeCategory = new Category { Name = "---Chọn thể loại sách---" };
             listCategory.Insert(0, fakeCategory);
+            int i = 0;
+            foreach(Category x in listCategory)
+            {
+                if(x.Id == book.CategoryId)
+                {
+                    break;
+                }
+                else
+                {
+                    i++;
+                }
+            }
             selectCategory.DataSource = listCategory;
             selectCategory.ValueMember = "Id";
             selectCategory.DisplayMember = "Name";
+            selectCategory.SelectedIndex = i;
         }
         public bool CheckData()
         {
@@ -43,12 +70,12 @@ namespace BookStoreDesktop.ContainerApplication
                 MessageBox.Show("Tên sách không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if(txtPrice.Value == 0)
+            if (txtPrice.Value == 0)
             {
                 MessageBox.Show("Giá bán không phù hợp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if(txtQuantity.Value == 0)
+            if (txtQuantity.Value == 0)
             {
                 MessageBox.Show("Số lượng sản phẩm không phù hợp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -63,37 +90,17 @@ namespace BookStoreDesktop.ContainerApplication
                 MessageBox.Show("Thể loại sách không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            if (String.IsNullOrWhiteSpace(this.pathFile))
-            {
-                MessageBox.Show("Hình ảnh sản phẩm không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
             return true;
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;*.png)|*.jpg; *.jpeg; *.gif; *.bmp;*.png";
-            if (open.ShowDialog() == DialogResult.OK)
-            {
-                this.pathFile = open.FileName;
-                pictureBox1.Image = new Bitmap(open.FileName);
-            }
-        }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void ContainerUpdateBook_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void ContainerAddBook_Load(object sender, EventArgs e)
-        {
+            GetData();
             SelectCategory();
-            txtName.Focus();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -101,54 +108,58 @@ namespace BookStoreDesktop.ContainerApplication
 
         }
 
-        private void ContainerAddBook_FormClosing(object sender, FormClosingEventArgs e)
+        private void btnUpload_Click(object sender, EventArgs e)
         {
-            this._containerBook.LoadData();
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;*.png)|*.jpg; *.jpeg; *.gif; *.bmp;*.png";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = new Bitmap(open.FileName);
+                this.pathImg = open.FileName;
+            }
         }
-        private void txtPrice_ValueChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             bool checkData = CheckData();
             if (checkData)
             {
-                button1.Enabled = false;
-                //string pathFolder = Path.Combine(@"D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop", "Images");
-                //string[] f = this.pathFile.Split('\\');
-                //string fileName = $"{DateTime.Now.ToString("HH-mm-ss-dd-MM-yyyy")}-{f[f.Length - 1]}";
-                //string pathFileName = Path.Combine(pathFolder, fileName);
+                Book book = this._bookService.GetBookById(_id);
                 BookDTO newBook = new BookDTO
                 {
                     Name = txtName.Text,
                     Author = txtAuthor.Text,
                     CategoryId = Convert.ToInt32(selectCategory.SelectedValue.ToString()),
-                    ImgPath = this.pathFile,
+                    ImgPath = this.pathImg,
                     Price = (int)txtPrice.Value,
                     Quantity = (int)txtQuantity.Value,
                 };
-                bool reponse = this._bookService.CreateBook(newBook);
+                bool reponse = this._bookService.UpdateBook(newBook,this._id);
                 if (reponse)
                 {
+                    if(book.CategoryId != newBook.CategoryId)
+                    {
+                        Category categoryOld = this._categoryService.GetItemCategory(Convert.ToInt32(book.CategoryId));
+                        categoryOld.Quantity -= 1;
+                        this._categoryService.UpdateQuantity(categoryOld);
+                        Category categoryNew = this._categoryService.GetItemCategory(newBook.CategoryId);
+                        categoryNew.Quantity += 1;
+                        this._categoryService.UpdateQuantity(categoryNew);
+                    }
                     //File.Delete(pathFileName);
                     //File.Copy(this.pathFile, pathFileName,true);
-                    Category category = this._categoryService.GetItemCategory(newBook.CategoryId);
-                    category.Quantity += 1;
-                    this._categoryService.UpdateQuantity(category);
                     this.Close();
                 }
                 else
                 {
-                    button1.Enabled = true;
+                    btnUpdate.Enabled = true;
                 }
             }
         }
 
-        private void ContainerAddBook_FormClosed(object sender, FormClosedEventArgs e)
+        private void ContainerUpdateBook_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+            this._containerBook.LoadData();
         }
     }
 }

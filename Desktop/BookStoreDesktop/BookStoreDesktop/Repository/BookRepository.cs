@@ -12,6 +12,14 @@ namespace BookStoreDesktop.Repository
 {
     public class BookRepository : IBookRepository
     {
+        public Book CheckCategoryId(int categoryID)
+        {
+            using(var _context = new BookStoreContext())
+            {
+                return _context.Books.Where(x => x.CategoryId == categoryID).FirstOrDefault();
+            }
+        }
+
         public void CreateBook(Book book)
         {
            using(var _context = new BookStoreContext())
@@ -34,7 +42,7 @@ namespace BookStoreDesktop.Repository
         {
             using(var _context = new BookStoreContext())
             {
-                return _context.Books.AsNoTracking().ToList();
+                return _context.Books.AsNoTracking().OrderByDescending(x=>x.TimeCreate).ToList();
             }
         }
 

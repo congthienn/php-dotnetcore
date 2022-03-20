@@ -154,6 +154,7 @@
             // 
             // container
             // 
+            this.container.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.container.Dock = System.Windows.Forms.DockStyle.Fill;
             this.container.Location = new System.Drawing.Point(285, 0);
             this.container.Name = "container";
@@ -165,7 +166,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1445, 706);
             this.Controls.Add(this.container);
             this.Controls.Add(this.panel1);

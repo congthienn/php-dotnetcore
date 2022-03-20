@@ -30,9 +30,9 @@ namespace BookStoreDesktop.ContainerApplication
             btnAdd.Enabled = true;
             btnCancel.Enabled = false;
             btnSave.Enabled = false;
-            btnUpdate.Enabled = true;
+            btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-            btnDelete.Enabled = true;
+            btnDelete.Enabled = false;
             txtName.Text = null;
             dataRole.Enabled = true;
             btnAdd.Focus();
@@ -61,7 +61,12 @@ namespace BookStoreDesktop.ContainerApplication
         public void LoadData()
         {
             List<Role> listRole = this._roleService.GetAllRole();
-            dataRole.DataSource = ConvertDataTable.ToDataTable<Role>(listRole);
+            if(listRole.Count == 0)
+            {
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
+            }
+            dataRole.DataSource = listRole;
         }
         private void ContaineRole_Load(object sender, EventArgs e)
         {
@@ -88,7 +93,6 @@ namespace BookStoreDesktop.ContainerApplication
                     {
                         LockControll();
                         LoadData();
-
                     }
                     else
                     {
@@ -135,6 +139,8 @@ namespace BookStoreDesktop.ContainerApplication
             if(dataRole.CurrentCell != null)
             {
                 this.index = dataRole.CurrentCell.RowIndex;
+                btnUpdate.Enabled = true;
+                btnDelete.Enabled = true;
             }
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -146,7 +152,6 @@ namespace BookStoreDesktop.ContainerApplication
                 LoadData();
             }
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             flag = "Update";

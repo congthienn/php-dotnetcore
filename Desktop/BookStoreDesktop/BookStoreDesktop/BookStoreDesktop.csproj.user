@@ -10,7 +10,13 @@
     <Compile Update="ContainerApplication\ContainerBook.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ContainerApplication\ContainerDetailBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ContainerApplication\ContainerRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ContainerApplication\ContainerUpdateBook.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form1.cs">

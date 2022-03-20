@@ -13,7 +13,7 @@ namespace BookStoreDesktop.Automapper
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<Role, RoleDTO>().ReverseMap();
-            CreateMap<Book, BookDTO>().ReverseMap();    
+            CreateMap<Book, BookDTO>().ReverseMap();
         }
     }
 }

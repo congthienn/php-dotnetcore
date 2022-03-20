@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreDesktop.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20220319063922_create_table_book")]
-    partial class create_table_book
+    [Migration("20220319142818_create_table_books")]
+    partial class create_table_books
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,9 @@ namespace BookStoreDesktop.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImgPath")
@@ -67,7 +67,7 @@ namespace BookStoreDesktop.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Book");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("BookStoreDesktop.Models.Category", b =>
@@ -132,9 +132,7 @@ namespace BookStoreDesktop.Migrations
                 {
                     b.HasOne("BookStoreDesktop.Models.Category", null)
                         .WithMany("Books")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("BookStoreDesktop.Models.Category", b =>
