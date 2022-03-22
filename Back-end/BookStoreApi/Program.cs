@@ -1,12 +1,12 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BookStoreApi.Autofac;
+using BookStoreApi.SignalRCRUD;
 using BookStoreApi.Interfaces;
 using BookStoreApi.Services;
 using BookStoreApi.Settings;
 using Serilog;
 using Serilog.Filters;
-
 var builder = WebApplication.CreateBuilder(args); 
 
 //Config log file
@@ -51,6 +51,8 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 //Add AutoMapper 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+//Add SignalR
+builder.Services.AddSignalR();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -67,5 +69,6 @@ app.UseResponseCaching();
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();
+app.MapHub<SignalRCRUD>("/SignalRCRUD");
 app.UseHttpLogging();
 app.Run();

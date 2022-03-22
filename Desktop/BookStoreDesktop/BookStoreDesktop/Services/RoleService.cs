@@ -4,71 +4,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.Interfaces.Services;
-using BookStoreDesktop.Interfaces.Repository;
 using BookStoreDesktop.Models;
 using BookStoreDesktop.Automapper;
-using BookStoreDesktop.Autofac;
+using BookStoreDesktop.DesignPatternRepository;
 namespace BookStoreDesktop.Services
 {
     public class RoleService : IRoleService
     {
-        private readonly IRoleRepository _roleRepository;
+        private readonly UnitOfWork _unitOfWork;
         public RoleService()
         {
-            this._roleRepository = AutofacInstance.GetInstance<IRoleRepository>();
+            this._unitOfWork = new UnitOfWork(); 
         }
         public bool CreateRole(RoleDTO roleDTO)
         {
             Role newRole = new Role();
             ConfigMapper.configMapper().Map(roleDTO,newRole);
-            Role validateName = this._roleRepository.ValidateName(newRole.Id, newRole.Name);
-            if(validateName != null)
+            var validateName = this._unitOfWork.RoleRepository.Get(x => x.Name == newRole.Name && x.Id != newRole.Id); 
+            if(validateName.ToList().Count > 0)
             {
                 MessageBox.Show("Tên chức vụ đã có, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            this._roleRepository.CreateRole(newRole);
+            this._unitOfWork.RoleRepository.Insert(newRole);
+            this._unitOfWork.Save();
             return true;
         }
 
         public bool DeleteRole(int id)
         {
-           Role role = this._roleRepository.GetRoleById(id);
+           Role role = this._unitOfWork.RoleRepository.GetByID(id);
             if(role is null)
             {
                 MessageBox.Show("Không tìm thấy chức vụ phù hợp, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            this._roleRepository.DeleteRole(role);
+            this._unitOfWork.RoleRepository.Delete(id);
+            this._unitOfWork.Save();
             return true;
         }
-
         public List<Role> GetAllRole()
         {
-            return this._roleRepository.GetAllRole();
+            var listRole = this._unitOfWork.RoleRepository.Get();
+            return listRole.ToList();
         }
 
         public List<Role> GetRoleByName(string name)
         {
-            return this._roleRepository.GetRoleByName(name);
+            var listRole = this._unitOfWork.RoleRepository.Get(x => x.Name.Contains(name));
+            return listRole.ToList();
         }
 
         public bool UpdateRole(RoleDTO roleDTO, int id)
         {
-            Role role = this._roleRepository.GetRoleById(id);
+            Role role = this._unitOfWork.RoleRepository.GetByID(id);
             if(role is null)
             {
                 MessageBox.Show("Không tìm thấy chức vụ phù hợp, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             ConfigMapper.configMapper().Map(roleDTO, role);
-            Role validateName = this._roleRepository.ValidateName(role.Id, role.Name);
-            if(validateName != null)
+            var validateName = this._unitOfWork.RoleRepository.Get(x=>x.Name == role.Name && x.Id==role.Id);
+            if(validateName.ToList().Count > 0)
             {
                 MessageBox.Show("Tên chức vụ đã có, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            this._roleRepository.UpdateRole(role);
+            this._unitOfWork.RoleRepository.Update(role);
+            this._unitOfWork.Save();
             return true;
         }
     }

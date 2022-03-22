@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.Interfaces.Services;
-using BookStoreDesktop.Interfaces.Repository;
 using BookStoreDesktop.Models;
-using BookStoreDesktop.Autofac;
+using BookStoreDesktop.DesignPatternRepository;
 using BookStoreDesktop.Automapper;
 namespace BookStoreDesktop.Services
 {
     public class BookService : IBookService
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly UnitOfWork _unitOfWork;
         public BookService()
         {
-            this._bookRepository = AutofacInstance.GetInstance<IBookRepository>();
+            this._unitOfWork = new UnitOfWork();
         }
 
         public bool CheckCategoryId(int categoryId)
         {
-            Book books = this._bookRepository.CheckCategoryId(categoryId);
-            if(books is null)
+            var books = this._unitOfWork.BookRepository.Get(x=>x.CategoryId == categoryId);
+            if(books.ToList().Count == 0)
             {
                 return true;
             }
@@ -33,64 +32,62 @@ namespace BookStoreDesktop.Services
         {
             Book newBook = new Book();
             ConfigMapper.configMapper().Map(book,newBook);
-            Book validateName = this._bookRepository.ValidateName(newBook.Name,newBook.Id);
-            if(validateName!= null)
+            var validateName = this._unitOfWork.BookRepository.Get(x=>x.Name==newBook.Name && x.Id != newBook.Id);
+            if(validateName.ToList().Count > 0)
             {
                 MessageBox.Show("Tên sách đã có, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            this._bookRepository.CreateBook(newBook);
+            this._unitOfWork.BookRepository.Insert(newBook);
+            this._unitOfWork.Save();
             return true;
         }
 
         public bool DeleteBook(string id)
         {
-            Book book = this._bookRepository.GetBookById(id);
+            Book book = this._unitOfWork.BookRepository.GetByID(id);
             if (book is null)
             {
                 MessageBox.Show("Không tìm thấy sách phù hợp, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            this._bookRepository.DeleteBook(book);
+            this._unitOfWork.BookRepository.Delete(id);
+            this._unitOfWork.Save();
             return true;
         }
 
         public List<Book> GetAllBook()
         {
-            return this._bookRepository.GetAllBook();
+            return this._unitOfWork.BookRepository.Get().ToList();
         }
 
         public Book GetBookById(string id)
         {
-            return this._bookRepository.GetBookById(id);
+            return this._unitOfWork.BookRepository.GetByID(id);
         }
 
         public List<Book> GetBookByName(string name)
         {
-            return this._bookRepository.GetBookByName(name);
-        }
-
-        public List<Book> GetBookByNameAndCategoryId(string name, int CategoryId)
-        {
-            return this._bookRepository.GetBookByNameAndCategory(name,CategoryId);
+            return this._unitOfWork.BookRepository.Get(x=>x.Name.Contains(name)).ToList();
         }
 
         public bool UpdateBook(BookDTO book, string id)
         {
-            Book findBook = this._bookRepository.GetBookById(id);
+            Book findBook = this._unitOfWork.BookRepository.GetByID(id);
             if(book is null)
             {
                 MessageBox.Show("Không tìm thấy sách phù hợp, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             ConfigMapper.configMapper().Map(book,findBook);
-            Book validateBook = this._bookRepository.ValidateName(findBook.Name, findBook.Id);
-            if(validateBook != null)
+            var validateBook = this._unitOfWork.BookRepository.Get(x => x.Name == findBook.Name && x.Id != findBook.Id).ToList();
+            if(validateBook.Count > 0)
             {
                 MessageBox.Show("Tên sách đã có, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            this._bookRepository.UpdateBook(findBook);
+            this._unitOfWork.BookRepository.Update(findBook);
+            this._unitOfWork.Save();
             return true;
         }
     }

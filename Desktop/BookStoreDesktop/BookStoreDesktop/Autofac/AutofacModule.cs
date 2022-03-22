@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 using Autofac;
 using BookStoreDesktop.Interfaces;
 using BookStoreDesktop.Services;
-using BookStoreDesktop.Repository;
 using AutoMapper;
 using BookStoreDesktop.Interfaces.Services;
-using BookStoreDesktop.Interfaces.Repository;
 
 namespace BookStoreDesktop.Autofac
 {
@@ -21,13 +19,6 @@ namespace BookStoreDesktop.Autofac
             builder.RegisterType<CategoryService>().As<ICategoryService>();
             builder.RegisterType<RoleService>().As<IRoleService>();
             builder.RegisterType<BookService>().As<IBookService>();
-
-
-
-            //Repository
-            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>();
-            builder.RegisterType<RoleRepository>().As<IRoleRepository>();
-            builder.RegisterType<BookRepository>().As<IBookRepository>();
         }
     }
 }

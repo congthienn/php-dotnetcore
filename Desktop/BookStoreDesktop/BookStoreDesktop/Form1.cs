@@ -4,7 +4,6 @@ using BookStoreDesktop.Autofac;
 using AutoMapper;
 using BookStoreDesktop.BookStoreDatabase;
 using BookStoreDesktop.Models;
-using BookStoreDesktop.Datatable;
 using BookStoreDesktop.Automapper;
 using BookStoreDesktop.Interfaces.Services;
 
@@ -168,7 +167,7 @@ namespace BookStoreDesktop
             else
             {
                 List<Category> listSearch = this._categoryService.GetCategoryByName(txtSrearch.Text);
-                dataCategory.DataSource = ConvertDataTable.ToDataTable<Category>(listSearch);
+                dataCategory.DataSource = listSearch;
             }
         }
     }

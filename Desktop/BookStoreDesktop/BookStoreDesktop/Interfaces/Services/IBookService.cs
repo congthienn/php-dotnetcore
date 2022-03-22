@@ -14,7 +14,6 @@ namespace BookStoreDesktop.Interfaces.Services
         bool UpdateBook(BookDTO book, string id);
         bool DeleteBook(string id);
         List<Book> GetBookByName(string name);
-        List<Book> GetBookByNameAndCategoryId(string name, int CategoryId);
         bool CheckCategoryId(int categoryId);
     }
 }

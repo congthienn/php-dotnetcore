@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BookStoreDesktop.Datatable;
 using BookStoreDesktop.Models;
 using BookStoreDesktop.Interfaces;
 using BookStoreDesktop.Autofac;
@@ -32,15 +31,6 @@ namespace BookStoreDesktop.ContainerApplication
             btnUpdate.Enabled = true;
             btnDetail.Enabled = true;
         }
-        public void SelectCategory()
-        {
-            List<Category> listCategory = this._categoryService.GetAllCategory();
-            Category fakeCategory = new Category { Name = "---Chon the loai sach---" };
-            listCategory.Insert(0, fakeCategory);
-            selectCategory.DataSource = listCategory;
-            selectCategory.ValueMember = "Id";
-            selectCategory.DisplayMember = "Name";
-        }
         public void LoadData()
         {
             List<Book> books = this._bookService.GetAllBook();
@@ -55,7 +45,6 @@ namespace BookStoreDesktop.ContainerApplication
         }
         private void ContainerBook_Load(object sender, EventArgs e)
         {
-            SelectCategory();
             LockControll();
             LoadData(); 
         }
@@ -102,6 +91,17 @@ namespace BookStoreDesktop.ContainerApplication
         {
             ContainerDetailBook containerDetailBook = new ContainerDetailBook(this.id,this);
             containerDetailBook.Show();
+        }
+
+        private void txtSrearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            List<Book> listBook = this._bookService.GetBookByName(txtSrearch.Text);
+            dataBook.DataSource = listBook;
+        }
+
+        private void bookBindingSource2_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

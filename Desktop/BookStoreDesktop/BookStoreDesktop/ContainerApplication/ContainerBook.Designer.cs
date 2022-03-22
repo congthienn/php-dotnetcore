@@ -43,10 +43,6 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dataBook = new System.Windows.Forms.DataGridView();
-            this.bookBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.bookBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.selectCategory = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.bookBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnDetail = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,8 +53,6 @@
             this.soldDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataBook)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,6 +74,7 @@
             this.txtSrearch.Name = "txtSrearch";
             this.txtSrearch.Size = new System.Drawing.Size(386, 31);
             this.txtSrearch.TabIndex = 16;
+            this.txtSrearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSrearch_KeyUp);
             // 
             // labelSearch
             // 
@@ -151,7 +146,7 @@
             this.quantityDataGridViewTextBoxColumn,
             this.soldDataGridViewTextBoxColumn,
             this.authorDataGridViewTextBoxColumn});
-            this.dataBook.DataSource = this.bookBindingSource2;
+            this.dataBook.DataSource = this.bookBindingSource;
             this.dataBook.Location = new System.Drawing.Point(36, 226);
             this.dataBook.Name = "dataBook";
             this.dataBook.ReadOnly = true;
@@ -161,37 +156,6 @@
             this.dataBook.TabIndex = 25;
             this.dataBook.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataBook_CellContentClick);
             this.dataBook.SelectionChanged += new System.EventHandler(this.dataBook_SelectionChanged);
-            // 
-            // bookBindingSource2
-            // 
-            this.bookBindingSource2.DataSource = typeof(BookStoreDesktop.Models.Book);
-            // 
-            // bookBindingSource1
-            // 
-            this.bookBindingSource1.DataSource = typeof(BookStoreDesktop.Models.Book);
-            // 
-            // selectCategory
-            // 
-            this.selectCategory.DisplayMember = "Chọn thể loại sách";
-            this.selectCategory.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.selectCategory.FormattingEnabled = true;
-            this.selectCategory.Items.AddRange(new object[] {
-            "Chọn thể loại sách"});
-            this.selectCategory.Location = new System.Drawing.Point(490, 169);
-            this.selectCategory.Name = "selectCategory";
-            this.selectCategory.Size = new System.Drawing.Size(325, 34);
-            this.selectCategory.TabIndex = 35;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(490, 140);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(147, 26);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "Tìm kiếm sách";
             // 
             // bookBindingSource
             // 
@@ -218,7 +182,7 @@
             this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 150;
+            this.idDataGridViewTextBoxColumn.Width = 125;
             // 
             // pictureDataGridViewImageColumn
             // 
@@ -228,7 +192,7 @@
             this.pictureDataGridViewImageColumn.MinimumWidth = 6;
             this.pictureDataGridViewImageColumn.Name = "pictureDataGridViewImageColumn";
             this.pictureDataGridViewImageColumn.ReadOnly = true;
-            this.pictureDataGridViewImageColumn.Width = 120;
+            this.pictureDataGridViewImageColumn.Width = 125;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -250,7 +214,7 @@
             this.priceDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             this.priceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.priceDataGridViewTextBoxColumn.Width = 125;
+            this.priceDataGridViewTextBoxColumn.Width = 150;
             // 
             // quantityDataGridViewTextBoxColumn
             // 
@@ -283,17 +247,15 @@
             this.authorDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
             this.authorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.authorDataGridViewTextBoxColumn.Width = 250;
+            this.authorDataGridViewTextBoxColumn.Width = 300;
             // 
             // ContainerBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 706);
-            this.Controls.Add(this.btnDetail);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.selectCategory);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnDetail);
             this.Controls.Add(this.txtSrearch);
             this.Controls.Add(this.labelSearch);
             this.Controls.Add(this.btnDelete);
@@ -305,8 +267,6 @@
             this.Text = "ContainerBook";
             this.Load += new System.EventHandler(this.ContainerBook_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataBook)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -322,12 +282,8 @@
         private Button btnUpdate;
         public Button btnAdd;
         public DataGridView dataBook;
-        private ComboBox selectCategory;
-        private Label label2;
-        private BindingSource bookBindingSource1;
-        private BindingSource bookBindingSource;
-        private BindingSource bookBindingSource2;
         public Button btnDetail;
+        private BindingSource bookBindingSource;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewImageColumn pictureDataGridViewImageColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
