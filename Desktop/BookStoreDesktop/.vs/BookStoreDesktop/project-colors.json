@@ -35,7 +35,17 @@
       "ProjectGuid": "d84cf860-a722-45cd-86bb-931ee32b4221",
       "DisplayName": "SqlServerMigrations",
       "ColorIndex": 5
+    },
+    "378b943d-6262-4c48-957f-a8af91df7e02": {
+      "ProjectGuid": "378b943d-6262-4c48-957f-a8af91df7e02",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 6
+    },
+    "e1b40b90-9d85-4998-a0d8-9fb5ee9571b4": {
+      "ProjectGuid": "e1b40b90-9d85-4998-a0d8-9fb5ee9571b4",
+      "DisplayName": "PostgreSQLMigrations",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 6
+  "NextColorIndex": 8
 }

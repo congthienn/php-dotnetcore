@@ -1,0 +1,17 @@
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\BookStoreDesktop.deps.json
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\BookStoreDesktop.runtimeconfig.json
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\appsettings.json
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\BookStoreDesktop.exe
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\PostgreSQLMigrations.deps.json
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\PostgreSQLMigrations.dll
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\ref\PostgreSQLMigrations.dll
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\PostgreSQLMigrations.pdb
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.csproj.AssemblyReference.cache
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.GeneratedMSBuildEditorConfig.editorconfig
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.AssemblyInfoInputs.cache
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.AssemblyInfo.cs
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.csproj.CoreCompileInputs.cache
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.csproj.CopyComplete
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.dll
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\ref\PostgreSQLMigrations.dll
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\PostgreSQLMigrations\obj\Debug\net6.0-windows\PostgreSQLMigrations.pdb

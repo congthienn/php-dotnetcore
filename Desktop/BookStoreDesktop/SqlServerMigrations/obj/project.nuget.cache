@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Xo7lyZnCXfkDGAEcxiFCME9GsifEYYR3XtYc21i6emqLaux+B6UuDaLBq8HvhzOqoLDOVkbyt5VRU1L9rcWRsg==",
+  "dgSpecHash": "bZq0jVjuPm4kztMsPKJwxINjKaQmwIH2WD5BJHhA+o7DOcei1ktRLHPVv+PqlKfUdHBbqQ3uQkF5ufyM2yZXUw==",
   "success": true,
   "projectFilePath": "D:\\xampp\\htdocs\\php-dotnetcore\\Desktop\\BookStoreDesktop\\SqlServerMigrations\\SqlServerMigrations.csproj",
   "expectedPackageFiles": [
@@ -46,6 +46,8 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\npgsql\\6.0.3\\npgsql.6.0.3.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.3\\npgsql.entityframeworkcore.postgresql.6.0.3.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",

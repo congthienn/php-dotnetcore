@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "SqlServerMigrations/1.0.0": {
+      "PostgreSQLMigrations/1.0.0": {
         "dependencies": {
           "BookStoreDesktop": "1.0.0"
         },
         "runtime": {
-          "SqlServerMigrations.dll": {}
+          "PostgreSQLMigrations.dll": {}
         }
       },
       "Autofac/6.3.0": {
@@ -625,7 +625,7 @@
     }
   },
   "libraries": {
-    "SqlServerMigrations/1.0.0": {
+    "PostgreSQLMigrations/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

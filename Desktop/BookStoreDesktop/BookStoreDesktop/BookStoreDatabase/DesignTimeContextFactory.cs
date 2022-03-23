@@ -16,7 +16,7 @@ namespace BookStoreDesktop.BookStoreDatabase
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var connectionString = config.GetConnectionString("Default");
+            var connectionString = config.GetConnectionString("PostgreSQL");
             return new BookStoreContext();
         }
     }

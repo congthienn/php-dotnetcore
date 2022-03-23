@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fKVxQX2DEzV2yhOeZdxkkA4QlNOyal26OyBaCMRr3yiCNrZoHAN34otzpkwTdfg7a4B+MYmczpi8p8xDCwNLZw==",
+  "dgSpecHash": "tpkmxrOfia4r8sobSR4fGmJcLgPL6/GE+lPKPCb093IPPEpO9sa032UBTuUD5ejSOh9+CoSnu10w/9rhT5WnCw==",
   "success": true,
   "projectFilePath": "D:\\xampp\\htdocs\\php-dotnetcore\\Desktop\\BookStoreDesktop\\BookStoreDesktop\\BookStoreDesktop.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,8 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\npgsql\\6.0.3\\npgsql.6.0.3.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.3\\npgsql.entityframeworkcore.postgresql.6.0.3.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",

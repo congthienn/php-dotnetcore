@@ -28,8 +28,18 @@ namespace BookStoreDesktop.Models
         [Required]
         [Unicode(true),MaxLength(255)]
         public string Author { get; set; }
+       
+        private DateTime timeCreate = DateTime.UtcNow;
         [Column("Create_at")]
-        public DateTime TimeCreate { get; set; } = DateTime.UtcNow;
+        public DateTime TimeCreate
+        {
+            get
+            {
+                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                return TimeZoneInfo.ConvertTimeFromUtc(timeCreate, cstZone);
+            }
+            set { this.timeCreate = DateTime.UtcNow; }
+        }
         public int? CategoryId { get; set; }
         public Image Picture
         {

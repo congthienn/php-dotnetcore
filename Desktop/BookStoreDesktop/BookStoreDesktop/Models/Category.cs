@@ -19,9 +19,17 @@ namespace BookStoreDesktop.Models
         [MaxLength(250),Unicode(true)]
         public string Name { get; set; }
         public int Quantity { get; set; } = 0;
+        private DateTime timeCreate = DateTime.UtcNow;
         [Column("Create_at")]
-        [DataType(DataType.Date)]
-        public DateTime TimeCreate { get; set; } = DateTime.UtcNow;
+        public DateTime TimeCreate
+        {
+            get
+            {
+                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                return TimeZoneInfo.ConvertTimeFromUtc(timeCreate, cstZone);
+            }
+            set { this.timeCreate = DateTime.UtcNow; }
+        }
         public List<Book>? Books { get; set; }
     }
     public class CategoryDTO
