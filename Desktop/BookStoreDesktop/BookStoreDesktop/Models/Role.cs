@@ -21,7 +21,7 @@ namespace BookStoreDesktop.Models
         [Unicode(true)]
         public string Name { get; set; }
         [Column("Create_at")]
-        public DateTime TimeCreate { get; set; } = DateTime.Now;
+        public DateTime TimeCreate { get; set; } = DateTime.UtcNow;
         public int Quantity { get; set; } = 0;
     }
     public class RoleDTO

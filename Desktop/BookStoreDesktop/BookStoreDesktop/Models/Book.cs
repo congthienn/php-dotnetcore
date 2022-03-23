@@ -9,16 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStoreDesktop.Models
 {
-    public static class RandomId
-    {
-        private static Random random = new Random();
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-    }
+    
     [Table("Books")]
     [Index(nameof(Book.Name),IsUnique = true)]
     public class Book
@@ -38,7 +29,7 @@ namespace BookStoreDesktop.Models
         [Unicode(true),MaxLength(255)]
         public string Author { get; set; }
         [Column("Create_at")]
-        public DateTime TimeCreate { get; set; } = DateTime.Now;
+        public DateTime TimeCreate { get; set; } = DateTime.UtcNow;
         public int? CategoryId { get; set; }
         public Image Picture
         {
@@ -69,5 +60,15 @@ namespace BookStoreDesktop.Models
         [Required]
         public string Author { get; set; }
         public int CategoryId { get; set; }
+    }
+    public static class RandomId
+    {
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
     }
 }

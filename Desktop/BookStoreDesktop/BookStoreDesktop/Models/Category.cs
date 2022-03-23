@@ -21,7 +21,7 @@ namespace BookStoreDesktop.Models
         public int Quantity { get; set; } = 0;
         [Column("Create_at")]
         [DataType(DataType.Date)]
-        public DateTime TimeCreate { get; set; } = DateTime.Now;
+        public DateTime TimeCreate { get; set; } = DateTime.UtcNow;
         public List<Book>? Books { get; set; }
     }
     public class CategoryDTO
