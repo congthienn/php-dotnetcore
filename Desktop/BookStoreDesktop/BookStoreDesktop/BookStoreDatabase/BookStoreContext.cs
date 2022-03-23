@@ -17,7 +17,7 @@ namespace BookStoreDesktop.BookStoreDatabase
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConnectionString);
+            optionsBuilder.UseSqlServer(ConnectionString,x=>x.MigrationsAssembly("SqlServerMigrations"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
