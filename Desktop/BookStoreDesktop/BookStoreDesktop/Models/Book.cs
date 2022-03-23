@@ -19,14 +19,13 @@ namespace BookStoreDesktop.Models
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
-    [Index(nameof(Book.Name),IsUnique = true)]
     [Table("Books")]
+    [Index(nameof(Book.Name),IsUnique = true)]
     public class Book
     {
         [Key]
         public string? Id { get; set; } = RandomId.RandomString(6);
-        [Column(TypeName = "nvarchar(255)")]
-        [Required,Unicode(false)]
+        [Required,Unicode(true)]
         public string Name { get; set; }
         public string ImgPath { get; set; }
         [Range(1,10000000000)]
@@ -36,8 +35,7 @@ namespace BookStoreDesktop.Models
         public int Quantity { get; set; }
         public int Sold { get; set; }
         [Required]
-        [Unicode(false),MaxLength(255)]
-        [Column(TypeName = "nvarchar(255)")]
+        [Unicode(true),MaxLength(255)]
         public string Author { get; set; }
         [Column("Create_at")]
         public DateTime TimeCreate { get; set; } = DateTime.Now;

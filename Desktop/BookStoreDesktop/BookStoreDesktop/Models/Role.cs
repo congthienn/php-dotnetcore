@@ -18,7 +18,7 @@ namespace BookStoreDesktop.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(150)]
-        [Column(TypeName="nvarchar(150)"),Unicode(true)]
+        [Unicode(true)]
         public string Name { get; set; }
         [Column("Create_at")]
         public DateTime TimeCreate { get; set; } = DateTime.Now;

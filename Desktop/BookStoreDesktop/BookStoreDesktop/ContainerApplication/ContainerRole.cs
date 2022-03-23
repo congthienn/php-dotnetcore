@@ -129,7 +129,7 @@ namespace BookStoreDesktop.ContainerApplication
             else
             {
                 List<Role> findRoleByname = this._roleService.GetRoleByName(txtSrearch.Text);
-                dataRole.DataSource = ConvertDataTable.ToDataTable<Role>(findRoleByname);
+                dataRole.DataSource = findRoleByname;
             }
         }
 

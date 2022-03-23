@@ -10,7 +10,32 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "0fc6044f-e661-48ac-95f8-b5e68d9edcf0": {
+      "ProjectGuid": "0fc6044f-e661-48ac-95f8-b5e68d9edcf0",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 1
+    },
+    "03092be2-3c2b-4b52-b923-7a60ab7dc777": {
+      "ProjectGuid": "03092be2-3c2b-4b52-b923-7a60ab7dc777",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 2
+    },
+    "b7ee69ef-a802-448e-8b8d-37d2a91e362a": {
+      "ProjectGuid": "b7ee69ef-a802-448e-8b8d-37d2a91e362a",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 3
+    },
+    "0378f713-b96d-493d-8933-e0187a68096b": {
+      "ProjectGuid": "0378f713-b96d-493d-8933-e0187a68096b",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 4
+    },
+    "d84cf860-a722-45cd-86bb-931ee32b4221": {
+      "ProjectGuid": "d84cf860-a722-45cd-86bb-931ee32b4221",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 6
 }

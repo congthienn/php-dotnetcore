@@ -16,8 +16,7 @@ namespace BookStoreDesktop.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [MaxLength(250),Unicode(false)]
-        [Column(TypeName = "nvarchar(250)")]
+        [MaxLength(250),Unicode(true)]
         public string Name { get; set; }
         public int Quantity { get; set; } = 0;
         [Column("Create_at")]
