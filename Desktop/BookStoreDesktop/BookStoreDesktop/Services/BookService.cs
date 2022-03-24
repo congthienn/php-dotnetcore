@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.Interfaces.Services;
 using BookStoreDesktop.Models;
-using BookStoreDesktop.DesignPatternRepository;
+using BookStoreDesktop.RepositoryPattern;
 using BookStoreDesktop.Automapper;
 namespace BookStoreDesktop.Services
 {

@@ -2,7 +2,7 @@
 using BookStoreDesktop.Interfaces;
 using BookStoreDesktop.Automapper;
 using BookStoreDesktop.Autofac;
-using BookStoreDesktop.DesignPatternRepository;
+using BookStoreDesktop.RepositoryPattern;
 namespace BookStoreDesktop.Services
 {
     public class CategoryService : ICategoryService

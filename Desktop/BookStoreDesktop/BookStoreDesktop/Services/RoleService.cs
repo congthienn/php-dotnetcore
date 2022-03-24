@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BookStoreDesktop.Interfaces.Services;
 using BookStoreDesktop.Models;
 using BookStoreDesktop.Automapper;
-using BookStoreDesktop.DesignPatternRepository;
+using BookStoreDesktop.RepositoryPattern;
 namespace BookStoreDesktop.Services
 {
     public class RoleService : IRoleService

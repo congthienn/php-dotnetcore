@@ -25,7 +25,7 @@ namespace BookStoreDesktop.Models
         {
             get
             {
-                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
                 return TimeZoneInfo.ConvertTimeFromUtc(timeCreate, cstZone);
             }
             set { this.timeCreate = DateTime.UtcNow; }

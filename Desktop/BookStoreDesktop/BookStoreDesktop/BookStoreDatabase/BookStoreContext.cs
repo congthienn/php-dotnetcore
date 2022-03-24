@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.Models;
-using BookStoreDesktop.BookStoreDatabase;
 namespace BookStoreDesktop.BookStoreDatabase
 {
     public class BookStoreContext : DbContext
@@ -17,8 +16,18 @@ namespace BookStoreDesktop.BookStoreDatabase
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(ConnectionString,x=>x.MigrationsAssembly("SqlServerMigrations"));
-            optionsBuilder.UseNpgsql(ConnectionString, x => x.MigrationsAssembly("PostgreSQLMigrations"));
+            string databaseDefault = ConnectSQLServer.DatabaseDefault();
+            if(databaseDefault == "SQLServer")
+            {
+                optionsBuilder.UseSqlServer(ConnectionString,x=>x.MigrationsAssembly("SqlServerMigrations"));
+            }else if(databaseDefault == "PostgreSQL")
+            {
+                optionsBuilder.UseNpgsql(ConnectionString, x => x.MigrationsAssembly("PostgreSQLMigrations"));
+            }
+            else
+            {
+                throw new ArgumentException("Default Database not a valid database type. Valid database: SQLServer - PostgerSQL");
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
