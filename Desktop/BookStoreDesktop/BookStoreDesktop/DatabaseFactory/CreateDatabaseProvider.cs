@@ -19,15 +19,13 @@ namespace BookStoreDesktop.DatabaseFactory
         public IDatabaseProvider CreateDatabase()
         {  
             string databaseDefault = GetStringAppsetting.DatabaseDefault();
-            switch (databaseDefault)
+            Type T = Type.GetType($"BookStoreDesktop.DatabaseProvider.{databaseDefault}");
+            if(T is null)
             {
-                case nameof(DBProvider.SQLServer):
-                    return new SQLServer();
-                case nameof(DBProvider.PostgreSQL):
-                    return new PostgreSQL();
-                default:
-                    throw new NotImplementedException("Default Database not a valid database type. Valid database: SQLServer - PostgerSQL");
+                throw new NotImplementedException("Default Database not a valid database type.");
             }
+            var DBProvider = Activator.CreateInstance(T) as IDatabaseProvider;
+            return DBProvider;
         }
     }
 }
