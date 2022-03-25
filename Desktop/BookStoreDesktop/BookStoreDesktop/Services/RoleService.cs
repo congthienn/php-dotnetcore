@@ -64,7 +64,7 @@ namespace BookStoreDesktop.Services
                 return false;
             }
             ConfigMapper.configMapper().Map(roleDTO, role);
-            var validateName = this._unitOfWork.RoleRepository.Get(x=>x.Name == role.Name && x.Id==role.Id);
+            var validateName = this._unitOfWork.RoleRepository.Get(x=>x.Name == role.Name && x.Id!=role.Id);
             if(validateName.ToList().Count > 0)
             {
                 MessageBox.Show("Tên chức vụ đã có, vui lòng kiểm tra lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);

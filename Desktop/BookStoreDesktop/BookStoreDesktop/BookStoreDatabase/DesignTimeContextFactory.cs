@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BookStoreDesktop.DatabaseFactory;
 namespace BookStoreDesktop.BookStoreDatabase
 {
     public class DesignTimeContextFactory : IDesignTimeDbContextFactory<BookStoreContext>
@@ -16,7 +16,8 @@ namespace BookStoreDesktop.BookStoreDatabase
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var connectionString = config.GetConnectionString("PostgreSQL");
+            string databaseDefault = GetStringAppsetting.DatabaseDefault();
+            var connectionString = "";
             return new BookStoreContext();
         }
     }
