@@ -1,0 +1,12 @@
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\bin\Debug\net6.0\LibraryAbstractDBProvider.deps.json
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\bin\Debug\net6.0\LibraryAbstractDBProvider.dll
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\bin\Debug\net6.0\ref\LibraryAbstractDBProvider.dll
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\bin\Debug\net6.0\LibraryAbstractDBProvider.pdb
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.csproj.AssemblyReference.cache
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.GeneratedMSBuildEditorConfig.editorconfig
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.AssemblyInfoInputs.cache
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.AssemblyInfo.cs
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.csproj.CoreCompileInputs.cache
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.dll
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\ref\LibraryAbstractDBProvider.dll
+D:\xampp\htdocs\php-dotnetcore\LibraryAbstractDBProvider\LibraryAbstractDBProvider\obj\Debug\net6.0\LibraryAbstractDBProvider.pdb

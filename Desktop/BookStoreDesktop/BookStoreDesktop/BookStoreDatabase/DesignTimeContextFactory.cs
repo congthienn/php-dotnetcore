@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.DatabaseFactory;
+using LibraryAbstractDBProvider;
+
 namespace BookStoreDesktop.BookStoreDatabase
 {
     public class DesignTimeContextFactory : IDesignTimeDbContextFactory<BookStoreContext>

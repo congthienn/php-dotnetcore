@@ -69,6 +69,5 @@ app.UseResponseCaching();
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();
-app.MapHub<SignalRCRUD>("/SignalRCRUD");
 app.UseHttpLogging();
 app.Run();

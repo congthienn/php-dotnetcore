@@ -144,3 +144,5 @@ D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\obj\Deb
 D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\obj\Debug\net6.0-windows\BookStoreDesktop.ContainerApplication.ContainerDetailBook.resources
 D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\Npgsql.dll
 D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\LibraryAbstractDBProvider.dll
+D:\xampp\htdocs\php-dotnetcore\Desktop\BookStoreDesktop\BookStoreDesktop\bin\Debug\net6.0-windows\LibraryAbstractDBProvider.pdb

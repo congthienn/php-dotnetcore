@@ -10,8 +10,11 @@
 
   <ItemGroup>
     <Compile Remove="Images\**" />
+    <Compile Remove="obj\**" />
     <EmbeddedResource Remove="Images\**" />
+    <EmbeddedResource Remove="obj\**" />
     <None Remove="Images\**" />
+    <None Remove="obj\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,9 +36,20 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LibraryAbstractDBProvider">
+      <HintPath>..\..\..\LibraryAbstractDBProvider\LibraryAbstractDBProvider\bin\Debug\net6.0\LibraryAbstractDBProvider.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 	<ItemGroup>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Properties\Settings.settings">
+		  <Generator>SettingsSingleFileGenerator</Generator>
+		  <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 		</None>
 	</ItemGroup>
 	<ItemGroup>
@@ -43,6 +57,11 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>

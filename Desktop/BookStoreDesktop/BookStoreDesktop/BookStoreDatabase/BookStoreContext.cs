@@ -5,20 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.Models;
-using BookStoreDesktop.DatabaseFactory;
+using LibraryAbstractDBProvider;
+
 namespace BookStoreDesktop.BookStoreDatabase
 {
     public class BookStoreContext : DbContext
     {
         private readonly string ConnectionString;
-        private readonly DBFactory dbFactory = new DBFactory();
+        private readonly CreateDatabase DBProvider = new CreateDatabase();
         public BookStoreContext()
         {
-            ConnectionString = dbFactory.GetDatabase().ConnectionString();
+            ConnectionString = DBProvider.GetDBProvider().ConnectionString();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            dbFactory.GetDatabase().ConnectedDatabase(optionsBuilder);
+            DBProvider.GetDBProvider().ConnectedDatabase(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

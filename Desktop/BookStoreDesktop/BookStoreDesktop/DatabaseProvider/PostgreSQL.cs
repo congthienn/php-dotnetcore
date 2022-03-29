@@ -6,15 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStoreDesktop.BookStoreDatabase;
+using LibraryAbstractDBProvider;
 namespace BookStoreDesktop.DatabaseProvider
 {
-    public class PostgreSQL : IDatabaseProvider
+    public class PostgreSQL : AbstractDBProvider
     {
-        public void ConnectedDatabase(DbContextOptionsBuilder optionsBuilder)
+        public override void ConnectedDatabase(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(ConnectionString(), x => x.MigrationsAssembly("PostgreSQLMigrations"));
         }
-        public string ConnectionString()
+        public override string ConnectionString()
         {
             IConfigurationRoot config = GetStringAppsetting.ConnectString();
             return config.GetConnectionString("PostgreSQL");
