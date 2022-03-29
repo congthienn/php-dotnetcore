@@ -20,7 +20,7 @@ namespace BookStoreApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<List<Role>> GetRoles() => await this._rolesService.GetRoles();
+        public async Task<IEnumerable<Role>> GetRoles() => await this._rolesService.GetRoles();
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> GetRoleById(string id)
@@ -38,8 +38,8 @@ namespace BookStoreApi.Controllers
         {
             Role newRole = new Role();
             this._mapper.Map(createRole, newRole);
-            Role validateRole = await this._rolesService.ValidateRoleName(newRole.Id, newRole.Name);
-            if(validateRole != null)
+            IEnumerable<Role> validateRole = await this._rolesService.ValidateRoleName(newRole.Id, newRole.Name);
+            if(validateRole.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Role is exist");
                 return BadRequest(ModelState);
@@ -56,13 +56,13 @@ namespace BookStoreApi.Controllers
                 ModelState.AddModelError("Error", "Role not found");
                 return BadRequest(ModelState);
             }
-            List<User> listUser = await this._usersService.GetListUserByRoleId(id);
-            if (listUser != null)
+            IEnumerable<User> listUser = await this._usersService.GetListUserByRoleId(id);
+            if (listUser.Count() > 0)
             {
                 foreach (User user in listUser)
                 {
                     user.RoleId = null;
-                    user.Role = null;
+                    //user.Role = null;
                     await this._usersService.UpdateUserAsync(user.Id, user);
                 }
             }
@@ -79,19 +79,19 @@ namespace BookStoreApi.Controllers
                 return BadRequest(ModelState);
             }
             var validateRole = await this._rolesService.ValidateRoleName(id, updateRole.Name);
-            if(validateRole != null)
+            if(validateRole.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Role is exist");
                 return BadRequest(ModelState);
             }
             this._mapper.Map(updateRole, findRole);
             RoleShow roleShow = this._mapper.Map<RoleShow>(findRole);
-            List<User> listUser = await this._usersService.GetListUserByRoleId(id);
-            if(listUser != null)
+            IEnumerable<User> listUser = await this._usersService.GetListUserByRoleId(id);
+            if(listUser.Count() > 0)
             {
                 foreach (User item in listUser)
                 {
-                    item.Role = roleShow;
+                    //item.Role = roleShow;
                     await this._usersService.UpdateUserAsync(item.Id, item);
                 }
             }

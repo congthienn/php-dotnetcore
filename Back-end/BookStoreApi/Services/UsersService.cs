@@ -3,24 +3,23 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using BookStoreApi.Settings;
 using BookStoreApi.Interfaces;
+using BookStoreApi.RepositoryPattern;
 namespace BookStoreApi.Services
 {
     public class UsersService : IUserService
     {
-        private readonly IMongoCollection<User> _userCollection;
+        private readonly UnitOfWorkSQL _unitOfWork;
         public UsersService(IOptions<BookStoreDatabaseSetting> bookStoreDataBaseSetting)
         {
-            var mongoClient = new MongoClient(bookStoreDataBaseSetting.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(bookStoreDataBaseSetting.Value.DatabaseName);
-            this._userCollection = mongoDatabase.GetCollection<User>("Users");
+            this._unitOfWork = new UnitOfWorkSQL();
         }
-        public async Task<List<User>> GetUserAsync() => await this._userCollection.Find(_ => true).SortByDescending(x => x.TimeCreate).ToListAsync();
-        public async Task<User?> GetUserAsync(string id) => await this._userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-        public async Task CreateUserAsync(User newUser) => await this._userCollection.InsertOneAsync(newUser);
-        public async Task UpdateUserAsync(string id,User updateUser) => await this._userCollection.ReplaceOneAsync(x=>x.Id == id,updateUser);
-        public async Task DeleteUserAsync(string id) => await this._userCollection.DeleteOneAsync(x=>x.Id == id);
-        public async Task<User?> ValidateEmailUser(string id, string email) => await this._userCollection.Find(x => x.Id != id && x.Email == email).FirstOrDefaultAsync();
-        public async Task<User?> ValidatePhoneUser(string id, string phone) => await this._userCollection.Find(x => x.Id != id && x.Phone == phone).FirstOrDefaultAsync();
-        public async Task<List<User>> GetListUserByRoleId(string roleId) => await this._userCollection.Find(x => x.RoleId == roleId).ToListAsync();
+        public async Task<IEnumerable<User>> GetUserAsync() => await this._unitOfWork.UserRepository.Get();
+        public async Task<User?> GetUserAsync(string id) => await this._unitOfWork.UserRepository.GetByID(id);
+        public async Task CreateUserAsync(User newUser) => await this._unitOfWork.UserRepository.Insert(newUser);
+        public async Task UpdateUserAsync(string id,User updateUser) => await this._unitOfWork.UserRepository.Update(updateUser);
+        public async Task DeleteUserAsync(string id) => await this._unitOfWork.UserRepository.Delete(id);
+        public async Task<IEnumerable<User?>> ValidateEmailUser(string id, string email) => await this._unitOfWork.UserRepository.Get(x=>x.Id != id && x.Email == email); 
+        public async Task<IEnumerable<User?>> ValidatePhoneUser(string id, string phone) => await this._unitOfWork.UserRepository.Get(x=>x.Id != id && x.Phone == phone);
+        public async Task<IEnumerable<User>> GetListUserByRoleId(string roleId) => await this._unitOfWork.UserRepository.Get(x=>x.RoleId == roleId);
     }
 }

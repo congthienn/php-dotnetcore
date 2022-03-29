@@ -21,7 +21,7 @@ namespace BookStoreApi.Controllers
         }
         [HttpGet]
         public async Task<List<Bill>> GetAll() => await this._billService.GetBills();
-        [HttpGet("{id:length(24)}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Bill>> GetBillById(string id)
         {
             Bill findBill = await this._billService.GetBillById(id);
@@ -71,9 +71,9 @@ namespace BookStoreApi.Controllers
                 Book findBook = await this._booksService.GetAsync(bookId);
                 BookInBill bookInbill = this._mapper.Map<BookInBill>(findBook);
                 bookInbill.Quantity = newBillDTO.Quantity[j];
-                if(findBook?.Category?.CategoryName != null) {
+                /*if(findBook?.Category?.CategoryName != null) {
                     bookInbill.Category = findBook.Category.CategoryName;
-                }
+                }*/
                 findBook.Sold += newBillDTO.Quantity[j];
                 await this._booksService.UpdateAsync(findBook.ID, findBook);
                 sumBill += findBook.Price * newBillDTO.Quantity[j];
@@ -82,7 +82,7 @@ namespace BookStoreApi.Controllers
             }
             Bill newBill = new Bill
             {
-                Books = listBook,
+                //Books = listBook,
                 Value = sumBill
             };
             await this._billService.CreateBill(newBill);

@@ -61,6 +61,7 @@ namespace BookStoreApi.Test
         {
             //Arrange
             Category newCategory = new Category();
+            IEnumerable<Category> validateCategory = new List<Category>();
             CategoryDTO categoryDTO = new CategoryDTO
             {
                 Name = "Khoa học công nghệ"
@@ -71,7 +72,7 @@ namespace BookStoreApi.Test
                 Name = "Khoa học công nghệ"
             };
             _mockMapper.Setup(x => x.Map(categoryDTO, newCategory));
-            _mockCategoryService.Setup(x => x.ValidateCategory(newCategory.Id, newCategory.Name)).ReturnsAsync(categoryExits);
+            _mockCategoryService.Setup(x => x.ValidateCategory(newCategory.Id, newCategory.Name)).ReturnsAsync(validateCategory);
             //Act
             IActionResult actionResult = await _testController.CreateCategory(categoryDTO);
             //Assert
@@ -142,13 +143,14 @@ namespace BookStoreApi.Test
             {
                 Name = "Lập trình"
             };
+            IEnumerable<Category> validateCategory = new List<Category>();
             Category existCategory = new Category
             {
                 Id = Convert.ToString(ObjectId.GenerateNewId()),
                 Name = "Giáo trình"
             };
             Category findCategory = new Category();
-            _mockCategoryService.Setup(x => x.ValidateCategory(findCategory.Id, categoryDTO.Name)).ReturnsAsync(existCategory);
+            _mockCategoryService.Setup(x => x.ValidateCategory(findCategory.Id, categoryDTO.Name)).ReturnsAsync(validateCategory);
             //Act
             IActionResult actionResult = await _testController.UpdateCategory(categoryID,categoryDTO);
             //Assert

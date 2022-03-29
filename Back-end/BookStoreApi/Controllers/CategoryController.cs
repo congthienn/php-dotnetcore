@@ -23,9 +23,9 @@ namespace BookStoreApi.Controllers
             _logsService = logsService;
         }
         [HttpGet]
-        public async Task<List<Category>> GetCategory() {
+        public async Task<IEnumerable<Category>> GetCategory() {
             this._logger.LogInformation(MyLogEvents.ListItems,"{e} - Run api: https://localhost:44313/api/category",MyLogEventTitle.ListItems);
-            List<Category> listCategory = await this._categoryService.GetCategory();
+            IEnumerable<Category> listCategory = await this._categoryService.GetCategory();
             await this._logsService.CreateLog((int)LogLevel.Information, Method.GET, "https://localhost:44313/api/category",null,"Get list category success",null);
             return listCategory;
         }
@@ -52,8 +52,8 @@ namespace BookStoreApi.Controllers
             this._logger.LogInformation(MyLogEvents.InsertItem, "{e} - Input: {input}", MyLogEventTitle.InsertItem, MyLogEvents.ShowObject(createCategory));
             Category newCategory = new Category();
             this._mapper.Map(createCategory,newCategory);
-            Category validateCategory = await this._categoryService.ValidateCategory(newCategory.Id,newCategory.Name);
-            if(validateCategory != null)
+            IEnumerable<Category> validateCategory = await this._categoryService.ValidateCategory(newCategory.Id,newCategory.Name);
+            if(validateCategory.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Category is exist");
                 this._logger.LogWarning(MyLogEvents.Error, "{e} - Category is exist", MyLogEventTitle.Error);
@@ -77,13 +77,13 @@ namespace BookStoreApi.Controllers
                 await this._logsService.CreateLog((int)LogLevel.Warning, Method.DELETE, $"https://localhost:44313/api/category/{id}", id, "Category not found", null);
                 return BadRequest(ModelState);
             }
-            List<Book> listCategory = await this._booksService.ListBookByCategoryId(findCategory.Id);
-            if(listCategory != null)
+            var listCategory = await this._booksService.ListBookByCategoryId(findCategory.Id);
+            if(listCategory.Count() > 0)
             {
                 foreach (Book book in listCategory)
                 {
                     book.CategoryId = null;
-                    book.Category = null;
+                    //book.Category = null;
                     await this._booksService.UpdateAsync(book.ID, book);
                 }
             }
@@ -104,8 +104,8 @@ namespace BookStoreApi.Controllers
                 await this._logsService.CreateLog((int)LogLevel.Warning, Method.PUT, $"https://localhost:44313/api/category/{id}", MyLogEvents.ShowObject(updateCategory), "Category not found", null);
                 return BadRequest(ModelState);
             }
-            Category validateCategory = await this._categoryService.ValidateCategory(findCategory.Id,updateCategory.Name);
-            if(validateCategory != null)
+            IEnumerable<Category> validateCategory = await this._categoryService.ValidateCategory(findCategory.Id,updateCategory.Name);
+            if(validateCategory.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Category is exist");
                 this._logger.LogWarning(MyLogEvents.Error, "{e} - Category is exist", MyLogEventTitle.Error);
@@ -114,12 +114,12 @@ namespace BookStoreApi.Controllers
             }
             this._mapper.Map(updateCategory,findCategory);
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
-            List<Book> listBook = await this._booksService.ListBookByCategoryId(findCategory.Id);
-            if(listBook != null)
+            var listBook = await this._booksService.ListBookByCategoryId(findCategory.Id);
+            if(listBook.Count() > 0)
             {
                 foreach (Book book in listBook)
                 {
-                    book.Category = category;
+                    //book.Category = category;
                     await this._booksService.UpdateAsync(book.ID, book);
                 }
             }

@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 using System.ComponentModel.DataAnnotations;
@@ -6,23 +7,37 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStoreApi.Models
 {
+    [Table("Books")]
+    [Index(nameof(Book.BookName),IsUnique = true)]
     public class Book
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string ID { get; set; }
+        [Key]
+        [StringLength(8)]
+        public string ID { get; set; } = RandomID.RandomString(8);
         [BsonElement("Name")]
+        [StringLength(255),Unicode(true)]
         public string BookName { get; set; }
         public string ImagePath { get; set; }
         public int Price { get; set; }
+        [DataType(DataType.Currency)]
         public string Currency { get; set; } = "VND";
         public int Quantity { get; set; }
         public int Sold { get; set; }
-        [ForeignKey("CategoryFK")]
-        public string CategoryId { get; set; }
-        public CategoryShow Category { get; set; }
+        [StringLength(255),Unicode(true)] 
         public string Author { get; set; }
-        public DateTime TimeCreate { get; set; } = DateTime.UtcNow;
+        private DateTime timeCreate = DateTime.UtcNow;
+        [Column("Create_at")]
+        public DateTime TimeCreate
+        {
+            get
+            {
+                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+                return TimeZoneInfo.ConvertTimeFromUtc(timeCreate, cstZone);
+            }
+            set { this.timeCreate = DateTime.UtcNow; }
+        }
+        public string CategoryId { get; set; }
+        IList<BillDetail>? BillDetails { get; set; }
     }
     public class BookInBill
     {

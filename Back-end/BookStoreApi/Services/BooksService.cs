@@ -3,25 +3,23 @@ using BookStoreApi.Settings;
 using BookStoreApi.Interfaces;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
-
+using BookStoreApi.RepositoryPattern;
 namespace BookStoreApi.Services
 {
     public class BooksService : IBookService
     {
-        private readonly IMongoCollection<Book> _bookCollection;
+        private readonly UnitOfWorkSQL _unitOfWork;
         public BooksService(IOptions<BookStoreDatabaseSetting> bookStoreDataBaseSetting)
         {
-            var clientMongo = new MongoClient(bookStoreDataBaseSetting.Value.ConnectionString);
-            var DatabaseMongo = clientMongo.GetDatabase(bookStoreDataBaseSetting.Value.DatabaseName);
-            this._bookCollection = DatabaseMongo.GetCollection<Book>("Books");
+            this._unitOfWork = new UnitOfWorkSQL();
         }
-        public async Task<List<Book>> GetAsync() => await _bookCollection.Find(_ => true).SortByDescending(x => x.TimeCreate).ToListAsync();
-        public async Task<Book?> GetAsync(string id) => await _bookCollection.Find(x => x.ID == id).FirstOrDefaultAsync();
-        public async Task CreateAsync(Book newBook) => await _bookCollection.InsertOneAsync(newBook);
-        public async Task UpdateAsync(string id,Book updateBook) => await this._bookCollection.ReplaceOneAsync(x => x.ID == id, updateBook);
-        public async Task DeleteAsync(string id) => await this._bookCollection.DeleteOneAsync(x => x.ID == id);
-        public async Task<Book?> ValidateBook(string id, string name) => await this._bookCollection.Find(x => x.ID != id && x.BookName == name).FirstOrDefaultAsync();
-        public async Task<List<Book>> ListBookByCategoryId(string id) => await this._bookCollection.Find(x => x.CategoryId == id).ToListAsync();
-        public async Task DeleteListCategory(string id) => await this._bookCollection.DeleteManyAsync(x => x.CategoryId == id);
+        public async Task<IEnumerable<Book>> GetAsync() => await this._unitOfWork.BookRepository.Get();
+        public async Task<Book?> GetAsync(string id) => await this._unitOfWork.BookRepository.GetByID(id);
+        public async Task CreateAsync(Book newBook) => await this._unitOfWork.BookRepository.Insert(newBook);
+        public async Task UpdateAsync(string id,Book updateBook) => await this._unitOfWork.BookRepository.Update(updateBook);
+        public async Task DeleteAsync(string id) => await this._unitOfWork.BookRepository.Delete(id);
+        public async Task<IEnumerable<Book?>> ValidateBook(string id, string name) => await this._unitOfWork.BookRepository.Get(x=>x.ID != id && x.BookName == name);
+        public async Task<IEnumerable<Book>> ListBookByCategoryId(string id) => await this._unitOfWork.BookRepository.Get(x=>x.CategoryId == id);
+        
     }
 }

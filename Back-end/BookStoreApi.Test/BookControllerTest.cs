@@ -57,13 +57,14 @@ namespace BookStoreApi.Test
             //Arrange
             BookDTO bookDTO = new BookDTO();
             Book newBook = new Book();
+            IEnumerable<Book> validateBook = new List<Book>();
             //Set file upload
             var fileName = "test.pdf";
             var stream = new MemoryStream();
             IFormFile file = new FormFile(stream, 0, stream.Length, "", fileName);
 
             _mockIMapper.Setup(x => x.Map(bookDTO, newBook));
-            _mockBookService.Setup(x => x.ValidateBook(newBook.ID, newBook.BookName)).ReturnsAsync(newBook);
+            _mockBookService.Setup(x => x.ValidateBook(newBook.ID, newBook.BookName)).ReturnsAsync(validateBook);
             //Act
             IActionResult result = await this._sut.CreateNewBook(bookDTO,file);
             //Assert
@@ -108,7 +109,7 @@ namespace BookStoreApi.Test
 
              CategoryShow categoryShow = new CategoryShow();
             _mockIMapper.Setup(x => x.Map<CategoryShow>(category)).Returns(categoryShow);
-            newBook.Category = categoryShow;
+            //newBook.Category = categoryShow;
             newBook.ImagePath = fileName;
             //Act
             IActionResult result = await this._sut.CreateNewBook(bookDTO, file);

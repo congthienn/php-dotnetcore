@@ -1,0 +1,38 @@
+[2022-03-29 15:16:23.173 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:16:42.704 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:16:47.899 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:16:56.649 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-29 15:16:56.673 +07:00  INF]  POST - Input: {"Name":"Truyện tranh"}
+[2022-03-29 15:16:56.955 +07:00  WRN]  ERROR - Category is exist
+[2022-03-29 15:17:47.724 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:17:55.350 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-29 15:17:55.372 +07:00  INF]  POST - Input: {"Name":"Truyện tranh"}
+[2022-03-29 15:17:56.595 +07:00  INF]  POST - Output: {"Id":"C1J96","Name":"Truyện tranh","Quantity":0,"TimeCreate":"2022-03-29T15:17:55.3800818","Book":null}
+[2022-03-29 15:18:07.219 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:18:21.017 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/C1J96
+[2022-03-29 15:18:21.224 +07:00  INF]  GET (ItemById) - Output: {"Id":"C1J96","Name":"Truyện tranh","Quantity":0,"TimeCreate":"2022-03-29T15:17:55.3800818","Book":null}
+[2022-03-29 15:18:29.739 +07:00  INF]  DELETE - Run api: https://localhost:44313/api/category/C1J96
+[2022-03-29 15:18:33.281 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:22:11.569 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-29 15:22:11.625 +07:00  INF]  POST - Input: {"Name":"Truyện tranh - Truyện thiếu nhi"}
+[2022-03-29 15:22:13.525 +07:00  INF]  POST - Output: {"Id":"K03PV","Name":"Truyện tranh - Truyện thiếu nhi","Quantity":0,"TimeCreate":"2022-03-29T15:22:11.6290205","Book":null}
+[2022-03-29 15:22:51.067 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/K03PV
+[2022-03-29 15:22:51.068 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa"}
+[2022-03-29 15:22:51.292 +07:00  INF]  PUT - Output: {"Id":"K03PV","Name":"Sách Giáo khoa","Quantity":0,"TimeCreate":"2022-03-29T15:22:11.6290205","Book":null}
+[2022-03-29 15:22:55.082 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:28:30.379 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-29 15:28:30.380 +07:00  INF]  POST - Input: {"Name":"Truyện tranh - Truyện thiếu nhi"}
+[2022-03-29 15:28:30.405 +07:00  INF]  POST - Output: {"Id":"K98F7","Name":"Truyện tranh - Truyện thiếu nhi","Quantity":0,"TimeCreate":"2022-03-29T15:28:30.3808711","Book":null}
+[2022-03-29 15:28:54.087 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-29 15:28:54.087 +07:00  INF]  POST - Input: {"Name":"Đời sống xã hội"}
+[2022-03-29 15:28:54.098 +07:00  INF]  POST - Output: {"Id":"HB3D7","Name":"Đời sống xã hội","Quantity":0,"TimeCreate":"2022-03-29T15:28:54.0880986","Book":null}
+[2022-03-29 15:29:15.647 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-29 15:29:15.647 +07:00  INF]  POST - Input: {"Name":"Khoa học - Kỹ thuật"}
+[2022-03-29 15:29:15.659 +07:00  INF]  POST - Output: {"Id":"YPRI9","Name":"Khoa học - Kỹ thuật","Quantity":0,"TimeCreate":"2022-03-29T15:29:15.6481618","Book":null}
+[2022-03-29 15:29:18.261 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 15:54:15.993 +07:00  INF]  DELETE - Run api: https://localhost:44313/api/category/C1J96
+[2022-03-29 15:54:16.093 +07:00  WRN]  ERROR - Category not found
+[2022-03-29 17:08:48.403 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 17:09:17.017 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 17:17:58.907 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-29 17:19:21.852 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category

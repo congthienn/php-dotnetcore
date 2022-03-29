@@ -1,9 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BookStoreApi.Autofac;
-using BookStoreApi.SignalRCRUD;
-using BookStoreApi.Interfaces;
-using BookStoreApi.Services;
+using BookStoreApi.DBContext;
 using BookStoreApi.Settings;
 using Serilog;
 using Serilog.Filters;
@@ -27,6 +25,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterMod
 //Config bookStotedatabase
 builder.Services.Configure<BookStoreDatabaseSetting>(builder.Configuration.GetSection("BookStoreDatabase"));
 
+builder.Services.AddDbContext<SQLContext>();
 //Dependency config
 
 /*builder.Services.AddScoped<IRoleService,RolesService>();

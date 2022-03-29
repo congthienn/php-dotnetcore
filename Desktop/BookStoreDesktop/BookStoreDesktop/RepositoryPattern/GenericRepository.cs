@@ -13,7 +13,7 @@ namespace BookStoreDesktop.RepositoryPattern
     {
         internal BookStoreContext context;
         internal DbSet<TEntity> dbSet;
-        public GenericRepository(BookStoreContext context)
+        public GenericRepository(BookStoreContext context)  
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

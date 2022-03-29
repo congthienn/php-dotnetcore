@@ -1,24 +1,39 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStoreApi.Models
 {
+    [Table("Users")]
+    [Index(nameof(User.Email),IsUnique = true)]
+    [Index(nameof(User.Phone),IsUnique = true)]
     public class User
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [Key]
+        [StringLength(8)]
+        public string Id { get; set; } = RandomID.RandomString(8);
+        [StringLength(255),Unicode(true)]
         public string Name { get; set; }
+        [StringLength(255)]
         public string Email { get; set; }
+        [StringLength(10)]
         public string Phone { get; set; }
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime TimeCreate { get; set; } = DateTime.Now;
-        [ForeignKey("RoleFK")]
-        public string RoleId { get; set; }
-        public RoleShow Role { get; set; }
+        private DateTime timeCreate = DateTime.UtcNow;
+        [Column("Create_at")]
+        public DateTime TimeCreate
+        {
+            get
+            {
+                TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+                return TimeZoneInfo.ConvertTimeFromUtc(timeCreate, cstZone);
+            }
+            set { this.timeCreate = DateTime.UtcNow; }
+        }
+        [Unicode(true)]
         public string Address { get; set; }
+        public string RoleId { get; set; }
     }
     public class UpdateUser
     {

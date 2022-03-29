@@ -58,9 +58,10 @@ namespace BookStoreApi.Test
             //Arrange
             CreateUser userDTO = new CreateUser();
             User newUser = new User();
+            IEnumerable<User> validateUser = new List<User>();
             User validateEmailUser = new User();
             _mockIMapper.Setup(x => x.Map(userDTO, newUser));
-            _mockUserService.Setup(x=>x.ValidateEmailUser(newUser.Id,newUser.Email)).ReturnsAsync(validateEmailUser);
+            _mockUserService.Setup(x=>x.ValidateEmailUser(newUser.Id,newUser.Email)).ReturnsAsync(validateUser);
             //Act
             IActionResult result =  await this._sut.PostItemUser(userDTO);
             //Assert
@@ -72,9 +73,10 @@ namespace BookStoreApi.Test
             //Arrange
             CreateUser userDTO = new CreateUser();
             User newUser = new User();
+            IEnumerable<User> validateUser = new List<User>();
             User validatePhonelUser = new User();
             _mockIMapper.Setup(x => x.Map(userDTO, newUser));
-            _mockUserService.Setup(x => x.ValidatePhoneUser(newUser.Id, newUser.Phone)).ReturnsAsync(validatePhonelUser);
+            _mockUserService.Setup(x => x.ValidatePhoneUser(newUser.Id, newUser.Phone)).ReturnsAsync(validateUser);
             //Act
             IActionResult result = await this._sut.PostItemUser(userDTO);
             //Assert
@@ -152,9 +154,10 @@ namespace BookStoreApi.Test
             string userId = Convert.ToString(ObjectId.GenerateNewId());
             UpdateUser userDTO = new UpdateUser();
             User user = new User();
+            IEnumerable<User> validateUser = new List<User>();
             User validatePhonelUser = new User();
             _mockUserService.Setup(x=>x.GetUserAsync(userId)).ReturnsAsync(user);
-            _mockUserService.Setup(x => x.ValidatePhoneUser(user.Id, user.Phone)).ReturnsAsync(validatePhonelUser);
+            _mockUserService.Setup(x => x.ValidatePhoneUser(user.Id, user.Phone)).ReturnsAsync(validateUser);
             //Act
             IActionResult result = await this._sut.UpdateUserById(userId,userDTO);
             //Assert
@@ -228,6 +231,7 @@ namespace BookStoreApi.Test
             string userId = Convert.ToString(ObjectId.GenerateNewId());
             User user = new User();
             Role role = new Role();
+            IEnumerable<User> validateUser = new List<User>();
             UpdateUser userDTO = new UpdateUser();
             JsonPatchDocument<UpdateUser> updaterUser = new JsonPatchDocument<UpdateUser>();
             _mockIMapper.Setup(x => x.Map<UpdateUser>(user)).Returns(userDTO);
@@ -235,7 +239,7 @@ namespace BookStoreApi.Test
             _mockUserService.Setup(x => x.GetUserAsync(userId)).ReturnsAsync(user);
             _mockIMapper.Setup(x => x.Map(userDTO, user));
             _mockRoleService.Setup(x => x.GetRoleById(user.Id)).ReturnsAsync(role);
-            _mockUserService.Setup(x => x.ValidatePhoneUser(user.Id, user.Phone)).ReturnsAsync(user);
+            _mockUserService.Setup(x => x.ValidatePhoneUser(user.Id, user.Phone)).ReturnsAsync(validateUser);
             //Act
             IActionResult result = await this._sut.UpdatePatch(userId, updaterUser);
             //Assert

@@ -21,8 +21,8 @@ namespace BookStoreApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<List<User>> GetUser() => await this._userService.GetUserAsync();
-        [HttpGet("{id:length(24)}")]
+        public async Task<IEnumerable<User>> GetUser() => await this._userService.GetUserAsync();
+        [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(string id){
             var user = await this._userService.GetUserAsync(id);
             if(user is null)
@@ -39,13 +39,13 @@ namespace BookStoreApi.Controllers
             User newUser = new User();
             this._mapper.Map(createUser, newUser);
             var validateEmail = await this._userService.ValidateEmailUser(newUser.Id, newUser.Email);
-            if(validateEmail != null)
+            if(validateEmail.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Email is exist");
                 error = true;
             }
             var validatePhone = await this._userService.ValidatePhoneUser(newUser.Id, newUser.Phone);
-            if(validatePhone != null)
+            if(validatePhone.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Phone is exist");
                 error = true;
@@ -61,13 +61,13 @@ namespace BookStoreApi.Controllers
                 return BadRequest(ModelState);
             }
             RoleShow roleShow = this._mapper.Map<RoleShow>(findRole);
-            newUser.Role = roleShow;
+            //newUser.Role = roleShow;
             findRole.Quantity += 1;
             await this._roleService.UpdateRoleById(findRole.Id, findRole);
             await this._userService.CreateUserAsync(newUser);
             return CreatedAtAction(nameof(GetUserById), new { id = newUser.Id }, newUser);
         }
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItemUser(string id)
         {
             var user = await this._userService.GetUserAsync(id);
@@ -97,7 +97,7 @@ namespace BookStoreApi.Controllers
             }
             bool error = false;
             var validatePhone = await this._userService.ValidatePhoneUser(id,updateUser.Phone);
-            if(validatePhone != null)
+            if(validatePhone.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Phone is exist");
                 error = true;
@@ -126,11 +126,11 @@ namespace BookStoreApi.Controllers
             }
             this._mapper.Map(updateUser, findUser);
             RoleShow roleShow = this._mapper.Map<RoleShow>(findRole);
-            findUser.Role = roleShow;
+            //findUser.Role = roleShow;
             await this._userService.UpdateUserAsync(findUser.Id, findUser);
             return CreatedAtAction(nameof(GetUserById), new { id = findUser.Id }, findUser);
         }
-        [HttpPatch("{id:length(24)}")]
+        [HttpPatch("{id}")]
         public async Task<IActionResult> UpdatePatch(string id,[FromBody] JsonPatchDocument<UpdateUser> updateUser)
         {
             User findUser = await this._userService.GetUserAsync(id);
@@ -152,8 +152,8 @@ namespace BookStoreApi.Controllers
                 ModelState.AddModelError("Error", "Foreign key (RoleId) does not exist");
                 error = true;
             }
-            User validatePhone = await this._userService.ValidatePhoneUser(findUser.Id, findUser.Phone);
-            if(validatePhone != null)
+            IEnumerable<User> validatePhone = await this._userService.ValidatePhoneUser(findUser.Id, findUser.Phone);
+            if(validatePhone.Count() > 0)
             {
                 ModelState.AddModelError("Error", "Phone is exist");
                 error = true;
@@ -171,7 +171,7 @@ namespace BookStoreApi.Controllers
                 await this._roleService.UpdateRoleById(findRole.Id, findRole);
             }
             RoleShow roleShow = this._mapper.Map<RoleShow>(findRole);
-            findUser.Role = roleShow;
+            //findUser.Role = roleShow;
             await this._userService.UpdateUserAsync(findUser.Id,findUser);
             return CreatedAtAction(nameof(GetUserById), new { id = findUser.Id }, findUser);
         }

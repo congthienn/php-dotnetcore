@@ -104,7 +104,7 @@ namespace BookStoreApi.Test
             List<BookInBill> listBook = new List<BookInBill> { bookInBill};
             Bill newBill = new Bill
             {
-                Books = listBook,
+                //Books = listBook,
                 Value = sumBill
             };
             //Act

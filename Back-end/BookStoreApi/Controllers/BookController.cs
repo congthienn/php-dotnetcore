@@ -45,11 +45,11 @@ namespace BookStoreApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<List<Book>> GetListBook()
+        public async Task<IEnumerable<Book>> GetListBook()
         {
             return await this._bookService.GetAsync();
         }
-        [HttpGet("detail/{id:length(24)}")]
+        [HttpGet("detail/{id}")]
         public async Task<ActionResult<Book>> GetItemBook(string id)
         {
             var book = await this._bookService.GetAsync(id);
@@ -66,7 +66,7 @@ namespace BookStoreApi.Controllers
             Book newBook = new Book();    
             this._mapper.Map(bookDTO, newBook);
             var findBook = await this._bookService.ValidateBook(newBook.ID,newBook.BookName);
-            if(findBook != null)    
+            if(findBook.Count() > 0)    
             {
                 ModelState.AddModelError("Error", "Name is exits");
                 return BadRequest(ModelState);
@@ -95,7 +95,7 @@ namespace BookStoreApi.Controllers
             findCategory.Quantity += 1;
             await this._categoryService.UpdateCategory(findCategory.Id, findCategory);
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
-            newBook.Category = category;
+            //newBook.Category = category;
             newBook.ImagePath = fileName;
             await this._bookService.CreateAsync(newBook);
             return CreatedAtAction(nameof(GetItemBook), new { id = newBook.ID }, newBook);
@@ -113,7 +113,7 @@ namespace BookStoreApi.Controllers
             var image = System.IO.File.OpenRead(pathImage);
             return File(image, "image/jpeg");
         }
-        [HttpPut("detail/{id:length(24)}")]
+        [HttpPut("detail/{id}")]
         [RequestFormLimits(MultipartBodyLengthLimit = 2147483648)]
         public async Task<IActionResult> UpdateBookItem_id(string id, [FromForm] BookDTO updateBook)
         {
@@ -123,7 +123,7 @@ namespace BookStoreApi.Controllers
                 ModelState.AddModelError("Error", "Book not found");
             }
             var validateBook = await this._bookService.ValidateBook(id, updateBook.Name);
-            if(validateBook != null)
+            if(validateBook.Count() > 0)
             {
                 ModelState.AddModelError("Error", "BookName is exist");
                 return BadRequest(ModelState);
@@ -167,11 +167,11 @@ namespace BookStoreApi.Controllers
             }
             this._mapper.Map(updateBook,book);
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
-            book.Category = category;
+            //book.Category = category;
             await this._bookService.UpdateAsync(book.ID, book);
             return CreatedAtAction(nameof(GetItemBook), new { id = book.ID}, book);
         }
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItemBook(string id)
         {
             var book = await this._bookService.GetAsync(id);
@@ -196,7 +196,7 @@ namespace BookStoreApi.Controllers
             }
             return NoContent();
         }
-        [HttpPatch("{id:length(24)}")]
+        [HttpPatch("{id}")]
         public async Task<IActionResult> UpdatePatch(string id,[FromBody] JsonPatchDocument<BookDTO> updateBook)
         {
             Book findBook = await this._bookService.GetAsync(id);
@@ -216,8 +216,8 @@ namespace BookStoreApi.Controllers
                 ModelState.AddModelError("Error", "Foreign key (CategoryId) does not exist");
                 error = true;
             }
-            Book validateBook = await this._bookService.ValidateBook(findBook.ID, findBook.BookName);
-            if (validateBook != null)
+            var validateBook = await this._bookService.ValidateBook(findBook.ID, findBook.BookName);
+            if (validateBook.Count() > 0)
             {
                 ModelState.AddModelError("Error", "BookName is exist");
                 error = true;
@@ -235,7 +235,7 @@ namespace BookStoreApi.Controllers
                 await this._categoryService.UpdateCategory(findCategory.Id, findCategory);
             }
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
-            findBook.Category = category;
+            //findBook.Category = category;
             await this._bookService.UpdateAsync(findBook.ID, findBook);
             return CreatedAtAction(nameof(GetItemBook), new { id = findBook.ID }, findBook);
         }

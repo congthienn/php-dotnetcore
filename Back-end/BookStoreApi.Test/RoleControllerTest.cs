@@ -8,6 +8,7 @@ using AutoMapper;
 using Xunit;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BookStoreApi.Test
 {
@@ -53,9 +54,10 @@ namespace BookStoreApi.Test
         {
             //Arrange
             Role role = new Role();
+            IEnumerable<Role> validateRole = new List<Role>();
             RoleDTO roleDTO = new RoleDTO();
             _mockIMapper.Setup(x => x.Map(roleDTO, role));
-            _mockRoleService.Setup(x => x.ValidateRoleName(role.Id,role.Name)).ReturnsAsync(role);
+            _mockRoleService.Setup(x => x.ValidateRoleName(role.Id,role.Name)).ReturnsAsync(validateRole);
             //Act
             IActionResult result = await this._sut.CreateRole(roleDTO);
             //Assert
@@ -117,9 +119,10 @@ namespace BookStoreApi.Test
             //Arrange
             string roleId = Convert.ToString(ObjectId.GenerateNewId());
             RoleDTO roleDTO = new RoleDTO();
+            IEnumerable<Role> validateRole = new List<Role>();
             Role role = new Role();
             _mockRoleService.Setup(x=>x.GetRoleById(roleId)).ReturnsAsync(role);
-            _mockRoleService.Setup(x => x.ValidateRoleName(roleId, roleDTO.Name)).ReturnsAsync(role);
+            _mockRoleService.Setup(x => x.ValidateRoleName(roleId, roleDTO.Name)).ReturnsAsync(validateRole);
             //Act
             IActionResult result = await this._sut.UpdateRole(roleId, roleDTO);
             //Assert
