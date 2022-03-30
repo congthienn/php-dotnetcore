@@ -1,8 +1,10 @@
 ﻿using MongoDB.Driver;
 using LibraryAbstractDBProvider;
+using LibraryAbstractDBProvider.DBContext;
+
 namespace BookStoreApi.DBContext
 {
-    public class MongoDBContext
+    public class MongoDBContext : IMongoDBContext
     {
         private readonly IMongoDatabase _mongoDB;
         public MongoDBContext()

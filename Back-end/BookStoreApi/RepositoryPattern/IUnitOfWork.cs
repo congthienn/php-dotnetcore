@@ -1,5 +1,5 @@
 ﻿using BookStoreApi.Models;
-
+using LibraryAbstractDBProvider;
 namespace BookStoreApi.RepositoryPattern
 {
     public interface IUnitOfWork 

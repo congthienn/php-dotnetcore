@@ -1,14 +1,18 @@
-﻿using BookStoreApi.DBContext;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BookStoreApi.RepositoryPattern
+namespace LibraryAbstractDBProvider.DBContext
 {
     public class GenericRepositorySQL<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal SQLContext context;
+        internal DbContext context;
         internal DbSet<TEntity> dbSet;
-        public GenericRepositorySQL(SQLContext context)
+        public GenericRepositorySQL(DbContext context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

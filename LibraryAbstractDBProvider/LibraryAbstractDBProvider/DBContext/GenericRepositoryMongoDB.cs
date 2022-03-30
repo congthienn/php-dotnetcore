@@ -1,14 +1,18 @@
-﻿using BookStoreApi.DBContext;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BookStoreApi.RepositoryPattern
+namespace LibraryAbstractDBProvider.DBContext
 {
     public class GenericRepositoryMongoDB<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly MongoDBContext _dbContext;
+        private readonly IMongoDBContext _dbContext;
         private IMongoCollection<TEntity> _mongoCollection;
-        public GenericRepositoryMongoDB(MongoDBContext mongoDBContext)
+        public GenericRepositoryMongoDB(IMongoDBContext mongoDBContext)
         {
             this._dbContext = mongoDBContext;
             this._mongoCollection = _dbContext.GetCollection<TEntity>(typeof(TEntity).Name);
@@ -26,12 +30,12 @@ namespace BookStoreApi.RepositoryPattern
             bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-            if(filter is null)
+            if (filter is null)
             {
                 var all = await this._mongoCollection.FindAsync(Builders<TEntity>.Filter.Empty);
                 return all.ToList();
             }
-            var allFiler= await this._mongoCollection.FindAsync(filter);
+            var allFiler = await this._mongoCollection.FindAsync(filter);
             return allFiler.ToList();
         }
 
@@ -42,7 +46,8 @@ namespace BookStoreApi.RepositoryPattern
         }
         public virtual async Task Insert(TEntity entity) => await this._mongoCollection.InsertOneAsync(entity);
 
-        public virtual async Task Update(TEntity entityUpdate) {
+        public virtual async Task Update(TEntity entityUpdate)
+        {
             var IdProperty = entityUpdate.GetType().GetProperty("Id").GetValue(entityUpdate, null);
             await this._mongoCollection.ReplaceOneAsync(Builders<TEntity>.Filter.Eq("_id", IdProperty), entityUpdate);
         }

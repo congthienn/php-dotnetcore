@@ -112,3 +112,27 @@
 [2022-03-30 19:46:02.867 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
 [2022-03-30 19:47:19.081 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
 [2022-03-30 19:48:11.735 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:50:19.620 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:50:32.136 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:50:46.891 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:50:51.084 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/YTXQ1
+[2022-03-30 19:50:51.108 +07:00  INF]  GET (ItemById) - Output: {"Id":"YTXQ1","Name":"MongoDB 2022","Quantity":1,"TimeCreate":"2022-03-30T19:50:51.0863997","Book":null}
+[2022-03-30 19:51:04.756 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/YTXQ1
+[2022-03-30 19:51:04.757 +07:00  INF]  PUT - Input:{"Name":"MongoDB 2022"}
+[2022-03-30 19:51:05.010 +07:00  INF]  PUT - Output: {"Id":"YTXQ1","Name":"MongoDB 2022","Quantity":1,"TimeCreate":"2022-03-30T19:51:04.7583261","Book":null}
+[2022-03-30 19:51:05.127 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:51:08.597 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:51:20.766 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:04:41.879 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:04:44.538 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:04:45.742 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:04:50.111 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:04:58.831 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:05:14.441 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:05:26.548 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 20:13:30.095 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 21:17:00.277 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 21:28:36.990 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 21:28:38.067 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 21:28:40.899 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 21:29:01.977 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category

@@ -1,6 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BookStoreApi.RepositoryPattern
+namespace LibraryAbstractDBProvider
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

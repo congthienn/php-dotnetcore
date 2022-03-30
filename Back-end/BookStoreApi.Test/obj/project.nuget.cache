@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Xap4lY6EO1jcoPtcZMyufDvtvPUY+x6Zvmc2F9ghgFgGVM1p0H+s0nM6AjtPA2qmQUNFlCGVl1xNIC0Ws4Pzrw==",
+  "dgSpecHash": "37LhsHPpBzGehVSrP2Btfr7UTd6PPtJqJJDZ1FMBR27TfXbW2Tk3LhnNa2w9kpRfZnKJ5GG7dlX6/WSgc2e6MQ==",
   "success": true,
   "projectFilePath": "D:\\xampp\\htdocs\\php-dotnetcore\\Back-end\\BookStoreApi.Test\\BookStoreApi.Test.csproj",
   "expectedPackageFiles": [
