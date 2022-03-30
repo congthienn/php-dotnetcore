@@ -38,8 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="LibraryAbstractDBProvider">
-      <HintPath>..\..\LibraryAbstractDBProvider\LibraryAbstractDBProvider\bin\Debug\net6.0\LibraryAbstractDBProvider.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\LibraryAbstractDBProvider\LibraryAbstractDBProvider\LibraryAbstractDBProvider.csproj" />
   </ItemGroup>
 </Project>

@@ -21,9 +21,10 @@ namespace BookStoreApi.Test
         private readonly Mock<IBillService> _mockBillService = new Mock<IBillService>();
         private readonly Mock<IBookService> _mockBookService = new Mock<IBookService>();
         private readonly Mock<IMapper> _mockIMapper = new Mock<IMapper>();
+        private readonly Mock<IBillDetailService> _billDetailService = new Mock<IBillDetailService>();
         public BillControllerTest()
         {
-            _sut = new BillController(_mockBillService.Object, _mockBookService.Object,_mockIMapper.Object);
+            _sut = new BillController(_mockBillService.Object, _mockBookService.Object,_mockIMapper.Object,_billDetailService.Object);
         }
         [Fact]
         public async Task GetBillById_WhenNotFound()

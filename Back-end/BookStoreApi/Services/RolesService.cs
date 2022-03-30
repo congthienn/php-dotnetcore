@@ -6,10 +6,11 @@ namespace BookStoreApi.Services
 {
     public class RolesService : IRoleService
     {
-        private readonly UnitOfWorkSQL _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+
         public RolesService()   
         {
-          this._unitOfWork = new UnitOfWorkSQL();
+          this._unitOfWork = GetUnitOfWork.UnitOfWork();
         }
         public async Task<IEnumerable<Role>> GetRoles() => await this._unitOfWork.RoleRepository.Get(orderBy:x=>x.OrderByDescending(x=>x.TimeCreate));
         public async Task<Role?> GetRoleById(string id) => await this._unitOfWork.RoleRepository.GetByID(id);

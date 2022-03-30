@@ -1,17 +1,16 @@
 ﻿using BookStoreApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using BookStoreApi.Settings;
 using BookStoreApi.Interfaces;
 using BookStoreApi.RepositoryPattern;
 namespace BookStoreApi.Services
 {
     public class UsersService : IUserService
     {
-        private readonly UnitOfWorkSQL _unitOfWork;
-        public UsersService(IOptions<BookStoreDatabaseSetting> bookStoreDataBaseSetting)
+        private readonly IUnitOfWork _unitOfWork;
+        public UsersService()
         {
-            this._unitOfWork = new UnitOfWorkSQL();
+            this._unitOfWork = GetUnitOfWork.UnitOfWork();
         }
         public async Task<IEnumerable<User>> GetUserAsync() => await this._unitOfWork.UserRepository.Get();
         public async Task<User?> GetUserAsync(string id) => await this._unitOfWork.UserRepository.GetByID(id);

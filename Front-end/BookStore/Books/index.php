@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div>
-                    <?php include_once __DIR__ . '/../layouts/partials/footer.php' ?>
+                    <?php include_once __DIR__ . '/../../BookStore/layouts/partials/footer.php' ?>
                 </div>
             </div>
         </div>

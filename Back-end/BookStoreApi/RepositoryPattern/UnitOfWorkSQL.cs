@@ -3,14 +3,16 @@ using BookStoreApi.Models;
 
 namespace BookStoreApi.RepositoryPattern
 {
-    public class UnitOfWorkSQL : IDisposable
+    public class UnitOfWorkSQL : AbstractUnitOfWork
     {
         private SQLContext _context = new SQLContext();
         private GenericRepositorySQL<Category> _categoryRepository;
         private GenericRepositorySQL<Role> _roleRepository;
         private GenericRepositorySQL<User> _userRepository;
         private GenericRepositorySQL<Book> _bookRepository;
-        public GenericRepositorySQL<Category> CategoryRepository
+        private GenericRepositorySQL<Bill> _billRepository;
+        private GenericRepositorySQL<BillDetail> _billDetailRepository;
+        public override GenericRepositorySQL<Category> CategoryRepository
         {
             get
             {
@@ -21,7 +23,7 @@ namespace BookStoreApi.RepositoryPattern
                 return this._categoryRepository;
             }
         }
-        public GenericRepositorySQL<Role> RoleRepository
+        public override GenericRepositorySQL<Role> RoleRepository
         {
             get
             {
@@ -32,7 +34,7 @@ namespace BookStoreApi.RepositoryPattern
                 return this._roleRepository;
             }
         }
-        public GenericRepositorySQL<User> UserRepository
+        public override GenericRepositorySQL<User> UserRepository
         {
             get
             {
@@ -43,7 +45,7 @@ namespace BookStoreApi.RepositoryPattern
                 return this._userRepository;
             }
         }
-        public GenericRepositorySQL<Book> BookRepository
+        public override GenericRepositorySQL<Book> BookRepository
         {
             get
             {
@@ -54,23 +56,27 @@ namespace BookStoreApi.RepositoryPattern
                 return this._bookRepository;
             }
         }
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
+        public override GenericRepositorySQL<Bill> BillRepository
         {
-            if (!this.disposed)
+            get
             {
-                if (disposing)
+                if(this._billRepository == null)
                 {
-                    this._context.Dispose();
+                    return this._billRepository = new GenericRepositorySQL<Bill>(_context);
                 }
+                return this._billRepository;
             }
-            this.disposed = true;
         }
-
-        public void Dispose()
+        public override GenericRepositorySQL<BillDetail> BillDetailRepository
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+            get
+            {
+                if(this._billDetailRepository == null)
+                {
+                    return this._billDetailRepository = new GenericRepositorySQL<BillDetail>(_context);
+                }
+                return this._billDetailRepository;
+            }
+        } 
     }
 }

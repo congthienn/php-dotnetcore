@@ -2,7 +2,6 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using BookStoreApi.Autofac;
 using BookStoreApi.DBContext;
-using BookStoreApi.Settings;
 using Serilog;
 using Serilog.Filters;
 var builder = WebApplication.CreateBuilder(args); 
@@ -23,7 +22,6 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacModule()));
 
 //Config bookStotedatabase
-builder.Services.Configure<BookStoreDatabaseSetting>(builder.Configuration.GetSection("BookStoreDatabase"));
 
 builder.Services.AddDbContext<SQLContext>();
 //Dependency config

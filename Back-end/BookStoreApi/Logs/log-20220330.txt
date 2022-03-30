@@ -1,0 +1,114 @@
+[2022-03-30 14:49:38.585 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 14:56:12.331 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 14:57:07.345 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 14:57:13.257 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/C1J96
+[2022-03-30 14:57:13.533 +07:00  WRN]  ERROR - Category not found
+[2022-03-30 14:57:20.924 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/HB3D7
+[2022-03-30 14:57:20.973 +07:00  INF]  GET (ItemById) - Output: {"Id":"HB3D7","Name":"Đời sống xã hội","Quantity":1,"TimeCreate":"2022-03-29T15:28:54.0880986","Book":null}
+[2022-03-30 15:18:05.974 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:20:14.721 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:20:45.920 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 15:20:45.933 +07:00  INF]  POST - Input: {"Name":"Khoa học - Kỹ thuật"}
+[2022-03-30 15:20:46.166 +07:00  INF]  POST - Output: {"Id":"ORSC2","Name":"Khoa học - Kỹ thuật","Quantity":0,"TimeCreate":"2022-03-30T15:20:45.9359027","Book":null}
+[2022-03-30 15:20:53.370 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:21:21.758 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:21:28.216 +07:00  INF]  DELETE - Run api: https://localhost:44313/api/category/ORSC2
+[2022-03-30 15:21:35.391 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:21:39.209 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 15:21:39.209 +07:00  INF]  POST - Input: {"Name":"Khoa học - Kỹ thuật"}
+[2022-03-30 15:21:39.212 +07:00  INF]  POST - Output: {"Id":"J9Q6O","Name":"Khoa học - Kỹ thuật","Quantity":0,"TimeCreate":"2022-03-30T15:21:39.2098124","Book":null}
+[2022-03-30 15:21:41.949 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:21:54.735 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 15:21:54.736 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa qqqqqqqqqqqqqqq"}
+[2022-03-30 15:21:54.740 +07:00  WRN]  ERROR - Category is exist
+[2022-03-30 15:40:50.818 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:46:06.427 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 15:46:11.247 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 15:46:11.250 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa qqqqqqqqqqqqqqq"}
+[2022-03-30 15:46:59.109 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 15:46:59.254 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa qqqqqqqqqqqqqqq"}
+[2022-03-30 15:58:31.595 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 15:58:31.716 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa qqqqqqqqqqqqqqq"}
+[2022-03-30 15:58:34.474 +07:00  INF]  PUT - Output: {"Id":"J9Q6O","Name":"Sách Giáo khoa qqqqqqqqqqqqqqq","Quantity":0,"TimeCreate":"2022-03-30T15:58:31.900458","Book":null}
+[2022-03-30 15:58:38.574 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 16:01:36.653 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 16:01:40.046 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/C1J96
+[2022-03-30 16:01:40.048 +07:00  WRN]  ERROR - Category not found
+[2022-03-30 16:01:47.895 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 16:01:47.896 +07:00  INF]  GET (ItemById) - Output: {"Id":"J9Q6O","Name":"Sách Giáo khoa qqqqqqqqqqqqqqq","Quantity":0,"TimeCreate":"2022-03-30T16:01:47.8963822","Book":null}
+[2022-03-30 16:01:52.561 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 16:01:52.561 +07:00  INF]  POST - Input: {"Name":"Khoa học - Kỹ thuật"}
+[2022-03-30 16:01:52.608 +07:00  INF]  POST - Output: {"Id":"2BEZV","Name":"Khoa học - Kỹ thuật","Quantity":0,"TimeCreate":"2022-03-30T16:01:52.5620934","Book":null}
+[2022-03-30 16:02:06.510 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 16:02:13.839 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 16:02:13.839 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa qqqqqqqqqqqqqqq"}
+[2022-03-30 16:02:13.919 +07:00  INF]  PUT - Output: {"Id":"J9Q6O","Name":"Sách Giáo khoa qqqqqqqqqqqqqqq","Quantity":0,"TimeCreate":"2022-03-30T16:02:13.8405374","Book":null}
+[2022-03-30 16:02:20.460 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 16:02:29.147 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/2BEZV
+[2022-03-30 16:02:29.147 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa qqqqqqqqqqqqqqq"}
+[2022-03-30 16:02:29.149 +07:00  WRN]  ERROR - Category is exist
+[2022-03-30 16:02:37.220 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/2BEZV
+[2022-03-30 16:02:37.220 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa"}
+[2022-03-30 16:02:37.235 +07:00  INF]  PUT - Output: {"Id":"2BEZV","Name":"Sách Giáo khoa","Quantity":0,"TimeCreate":"2022-03-30T16:02:37.2210948","Book":null}
+[2022-03-30 16:02:39.676 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 16:03:12.208 +07:00  INF]  DELETE - Run api: https://localhost:44313/api/category/2BEZV
+[2022-03-30 16:03:16.077 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 16:03:22.572 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 16:03:22.573 +07:00  INF]  PUT - Input:{"Name":"Sách Giáo khoa"}
+[2022-03-30 16:03:22.577 +07:00  INF]  PUT - Output: {"Id":"J9Q6O","Name":"Sách Giáo khoa","Quantity":0,"TimeCreate":"2022-03-30T16:03:22.5737787","Book":null}
+[2022-03-30 16:03:27.606 +07:00  INF]  DELETE - Run api: https://localhost:44313/api/category/J9Q6O
+[2022-03-30 16:03:29.364 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 18:04:40.066 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 18:32:58.097 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 18:41:25.345 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:04:39.105 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:05:45.387 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 19:05:45.389 +07:00  INF]  POST - Input: {"Name":"SQL Server"}
+[2022-03-30 19:05:45.675 +07:00  INF]  POST - Output: {"Id":"P9478","Name":"SQL Server","Quantity":0,"TimeCreate":"2022-03-30T19:05:45.3891649","Book":null}
+[2022-03-30 19:05:48.690 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:05:53.636 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:06:06.770 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 19:06:06.770 +07:00  INF]  POST - Input: {"Name":"SQL Server"}
+[2022-03-30 19:06:06.776 +07:00  WRN]  ERROR - Category is exist
+[2022-03-30 19:06:12.425 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:09:37.380 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:14:14.047 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:16:12.277 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:16:15.046 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:18:15.369 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:18:46.906 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:20:07.890 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:20:15.257 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 19:20:15.258 +07:00  INF]  POST - Input: {"Name":"SQL Server"}
+[2022-03-30 19:20:15.284 +07:00  INF]  POST - Output: {"Id":"5SRR0","Name":"SQL Server","Quantity":0,"TimeCreate":"2022-03-30T19:20:15.258436","Book":null}
+[2022-03-30 19:20:15.368 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:20:19.581 +07:00  INF]  GET (ItemById) - Run api: https://localhost:44313/api/category/5SRR0
+[2022-03-30 19:20:19.584 +07:00  INF]  GET (ItemById) - Output: {"Id":"5SRR0","Name":"SQL Server","Quantity":0,"TimeCreate":"2022-03-30T19:20:15.258436","Book":null}
+[2022-03-30 19:20:28.056 +07:00  INF]  PUT - Run api: https://localhost:44313/api/category/5SRR0
+[2022-03-30 19:20:28.058 +07:00  INF]  PUT - Input:{"Name":"SQL SERVER 2022"}
+[2022-03-30 19:20:28.121 +07:00  INF]  PUT - Output: {"Id":"5SRR0","Name":"SQL SERVER 2022","Quantity":0,"TimeCreate":"2022-03-30T19:20:15.258436","Book":null}
+[2022-03-30 19:20:28.191 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:20:31.288 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:21:11.590 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:21:13.255 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:21:15.376 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:27:00.929 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:27:46.476 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:29:00.666 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:29:19.360 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 19:29:19.372 +07:00  INF]  POST - Input: {"Name":"MongoDB 2022"}
+[2022-03-30 19:29:19.554 +07:00  INF]  POST - Output: {"Id":"YTXQ1","Name":"MongoDB 2022","Quantity":0,"TimeCreate":"2022-03-30T19:29:19.3747608","Book":null}
+[2022-03-30 19:29:19.627 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:29:22.790 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:31:46.771 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:42:54.483 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:43:15.709 +07:00  INF]  POST - Run api: https://localhost:44313/api/category
+[2022-03-30 19:43:15.725 +07:00  INF]  POST - Input: {"Name":"PostgreSQL 2022"}
+[2022-03-30 19:43:16.049 +07:00  INF]  POST - Output: {"Id":"5VM84","Name":"PostgreSQL 2022","Quantity":0,"TimeCreate":"2022-03-30T19:43:15.7280142","Book":null}
+[2022-03-30 19:43:16.167 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:43:20.121 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:43:21.825 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:44:31.074 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:46:02.867 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:47:19.081 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category
+[2022-03-30 19:48:11.735 +07:00  INF]  GET (ListItem) - Run api: https://localhost:44313/api/category

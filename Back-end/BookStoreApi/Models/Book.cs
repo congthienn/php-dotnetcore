@@ -13,7 +13,7 @@ namespace BookStoreApi.Models
     {
         [Key]
         [StringLength(8)]
-        public string ID { get; set; } = RandomID.RandomString(8);
+        public string Id { get; set; } = RandomID.RandomString(8);
         [BsonElement("Name")]
         [StringLength(255),Unicode(true)]
         public string BookName { get; set; }

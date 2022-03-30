@@ -65,7 +65,7 @@ namespace BookStoreApi.Controllers
         {
             Book newBook = new Book();    
             this._mapper.Map(bookDTO, newBook);
-            var findBook = await this._bookService.ValidateBook(newBook.ID,newBook.BookName);
+            var findBook = await this._bookService.ValidateBook(newBook.Id,newBook.BookName);
             if(findBook.Count() > 0)    
             {
                 ModelState.AddModelError("Error", "Name is exits");
@@ -98,7 +98,7 @@ namespace BookStoreApi.Controllers
             //newBook.Category = category;
             newBook.ImagePath = fileName;
             await this._bookService.CreateAsync(newBook);
-            return CreatedAtAction(nameof(GetItemBook), new { id = newBook.ID }, newBook);
+            return CreatedAtAction(nameof(GetItemBook), new { id = newBook.Id }, newBook);
         }
         [HttpGet("image/{dbPath}")]
         public IActionResult SeePicture(string dbPath)
@@ -168,8 +168,8 @@ namespace BookStoreApi.Controllers
             this._mapper.Map(updateBook,book);
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
             //book.Category = category;
-            await this._bookService.UpdateAsync(book.ID, book);
-            return CreatedAtAction(nameof(GetItemBook), new { id = book.ID}, book);
+            await this._bookService.UpdateAsync(book.Id, book);
+            return CreatedAtAction(nameof(GetItemBook), new { id = book.Id}, book);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItemBook(string id)
@@ -216,7 +216,7 @@ namespace BookStoreApi.Controllers
                 ModelState.AddModelError("Error", "Foreign key (CategoryId) does not exist");
                 error = true;
             }
-            var validateBook = await this._bookService.ValidateBook(findBook.ID, findBook.BookName);
+            var validateBook = await this._bookService.ValidateBook(findBook.Id, findBook.BookName);
             if (validateBook.Count() > 0)
             {
                 ModelState.AddModelError("Error", "BookName is exist");
@@ -236,8 +236,8 @@ namespace BookStoreApi.Controllers
             }
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
             //findBook.Category = category;
-            await this._bookService.UpdateAsync(findBook.ID, findBook);
-            return CreatedAtAction(nameof(GetItemBook), new { id = findBook.ID }, findBook);
+            await this._bookService.UpdateAsync(findBook.Id, findBook);
+            return CreatedAtAction(nameof(GetItemBook), new { id = findBook.Id }, findBook);
         }
         [HttpPost("upload")]
         [RequestFormLimits(MultipartBodyLengthLimit = 1073741824)]

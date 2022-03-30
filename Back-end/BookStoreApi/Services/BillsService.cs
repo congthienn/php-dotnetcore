@@ -1,22 +1,20 @@
 ﻿using BookStoreApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using BookStoreApi.Settings;
+using BookStoreApi.RepositoryPattern;
 using BookStoreApi.Interfaces;
 namespace BookStoreApi.Services
 {
     public class BillsService : IBillService
     {
-        private readonly IMongoCollection<Bill> _billCollection;
-        public BillsService(IOptions<BookStoreDatabaseSetting> bookStoreDatabaseSetting)
+        private readonly IUnitOfWork _unitOfWork;
+        public BillsService()
         {
-            var clientMongoDB = new MongoClient(bookStoreDatabaseSetting.Value.ConnectionString);
-            var DatabaseMongo = clientMongoDB.GetDatabase(bookStoreDatabaseSetting.Value.DatabaseName);
-            this._billCollection = DatabaseMongo.GetCollection<Bill>("Bills");
+            this._unitOfWork = GetUnitOfWork.UnitOfWork();
         }
-        public async Task<List<Bill>> GetBills() => await this._billCollection.Find(_ => true).SortByDescending(x => x.TimeCreate).ToListAsync();
-        public async Task<Bill?> GetBillById(string id) => await this._billCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-        public async Task CreateBill(Bill newBill) => await this._billCollection.InsertOneAsync(newBill);
-        public async Task UpdateBill(string id,Bill updateBill) => await this._billCollection.ReplaceOneAsync(x=>x.Id == id,updateBill);
+        public async Task<IEnumerable<Bill>> GetBills() => await this._unitOfWork.BillRepository.Get();
+        public async Task<Bill?> GetBillById(string id) => await this._unitOfWork.BillRepository.GetByID(id);
+        public async Task CreateBill(Bill newBill) => await this._unitOfWork.BillRepository.Insert(newBill);
+        public async Task UpdateBill(string id, Bill updateBill) => await this._unitOfWork.BillRepository.Update(updateBill);
     }
 }

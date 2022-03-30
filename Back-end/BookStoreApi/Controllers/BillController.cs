@@ -13,14 +13,16 @@ namespace BookStoreApi.Controllers
         private readonly IBillService _billService;
         private readonly IBookService _booksService;
         private readonly IMapper _mapper;
-        public BillController(IBillService billService,IBookService booksService,IMapper mapper)
+        private readonly IBillDetailService _billDetailService;
+        public BillController(IBillService billService,IBookService booksService,IMapper mapper,IBillDetailService billDetailService)
         {
             _billService = billService;
             _booksService = booksService;
             _mapper = mapper;
+            _billDetailService = billDetailService;
         }
         [HttpGet]
-        public async Task<List<Bill>> GetAll() => await this._billService.GetBills();
+        public async Task<IEnumerable<Bill>> GetAll() => await this._billService.GetBills();
         [HttpGet("{id}")]
         public async Task<ActionResult<Bill>> GetBillById(string id)
         {
@@ -65,27 +67,26 @@ namespace BookStoreApi.Controllers
             }
             //Update data
             var j = 0;
-            List<BookInBill> listBook = new List<BookInBill>();
+            Bill newBill = new Bill();
+            await this._billService.CreateBill(newBill);
             foreach (var bookId in newBillDTO.BookId)
             {
+                
                 Book findBook = await this._booksService.GetAsync(bookId);
-                BookInBill bookInbill = this._mapper.Map<BookInBill>(findBook);
-                bookInbill.Quantity = newBillDTO.Quantity[j];
-                /*if(findBook?.Category?.CategoryName != null) {
-                    bookInbill.Category = findBook.Category.CategoryName;
-                }*/
+                BillDetail billDetail = new BillDetail
+                {
+                    BillId = newBill.Id,
+                    BookId = findBook.Id,
+                    Quantity = newBillDTO.Quantity[j]
+                };
+                this._billDetailService.AddBill(billDetail);
                 findBook.Sold += newBillDTO.Quantity[j];
-                await this._booksService.UpdateAsync(findBook.ID, findBook);
+                await this._booksService.UpdateAsync(findBook.Id, findBook);
                 sumBill += findBook.Price * newBillDTO.Quantity[j];
-                listBook.Add(bookInbill);
                 j++;
             }
-            Bill newBill = new Bill
-            {
-                //Books = listBook,
-                Value = sumBill
-            };
-            await this._billService.CreateBill(newBill);
+            newBill.Value = sumBill;
+            this._billService.UpdateBill(newBill.Id, newBill);
             return CreatedAtAction(nameof(GetBillById), new {id = newBill.Id},newBill);
         }
     }

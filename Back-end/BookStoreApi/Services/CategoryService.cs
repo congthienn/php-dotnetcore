@@ -1,17 +1,16 @@
 ﻿using MongoDB.Driver;
 using BookStoreApi.Models;
 using Microsoft.Extensions.Options;
-using BookStoreApi.Settings;
 using BookStoreApi.RepositoryPattern;
 using BookStoreApi.Interfaces;
 namespace BookStoreApi.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly UnitOfWorkSQL _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         public CategoryService()
         {
-            this._unitOfWork = new UnitOfWorkSQL();
+            this._unitOfWork = GetUnitOfWork.UnitOfWork();
         }
         public async Task<IEnumerable<Category>> GetCategory() => await this._unitOfWork.CategoryRepository.Get();
         public virtual async Task<Category?> GetCategoryById(string id) => await this._unitOfWork.CategoryRepository.GetByID(id);

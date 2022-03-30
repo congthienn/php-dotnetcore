@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bZq0jVjuPm4kztMsPKJwxINjKaQmwIH2WD5BJHhA+o7DOcei1ktRLHPVv+PqlKfUdHBbqQ3uQkF5ufyM2yZXUw==",
+  "dgSpecHash": "5hY54HAGj4bqxIlWQupa9ZSOoKztoZ6W3txRAhUWUOTK6RiZPoMurauQNxZt/o2kepgRM9+OE2rhEkBXiHCzDg==",
   "success": true,
   "projectFilePath": "D:\\xampp\\htdocs\\php-dotnetcore\\Desktop\\BookStoreDesktop\\SqlServerMigrations\\SqlServerMigrations.csproj",
   "expectedPackageFiles": [
@@ -21,7 +21,7 @@
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.3\\microsoft.entityframeworkcore.sqlserver.6.0.3.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
-    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\6.0.0\\microsoft.extensions.configuration.fileextensions.6.0.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.extensions.configuration.json\\6.0.0\\microsoft.extensions.configuration.json.6.0.0.nupkg.sha512",

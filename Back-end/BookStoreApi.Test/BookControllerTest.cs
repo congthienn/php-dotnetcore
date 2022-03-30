@@ -64,7 +64,7 @@ namespace BookStoreApi.Test
             IFormFile file = new FormFile(stream, 0, stream.Length, "", fileName);
 
             _mockIMapper.Setup(x => x.Map(bookDTO, newBook));
-            _mockBookService.Setup(x => x.ValidateBook(newBook.ID, newBook.BookName)).ReturnsAsync(validateBook);
+            _mockBookService.Setup(x => x.ValidateBook(newBook.Id, newBook.BookName)).ReturnsAsync(validateBook);
             //Act
             IActionResult result = await this._sut.CreateNewBook(bookDTO,file);
             //Assert
@@ -82,7 +82,7 @@ namespace BookStoreApi.Test
             IFormFile file = new FormFile(stream, 0, stream.Length,"", fileName);
 
             _mockIMapper.Setup(x => x.Map(bookDTO, newBook));
-            _mockBookService.Setup(x => x.ValidateBook(newBook.ID, newBook.BookName)).ReturnsAsync(() => null);
+            _mockBookService.Setup(x => x.ValidateBook(newBook.Id, newBook.BookName)).ReturnsAsync(() => null);
             _mockCategoryService.Setup(x => x.GetCategoryById(newBook.CategoryId)).ReturnsAsync(() => null);
             //Act
             IActionResult result = await this._sut.CreateNewBook(bookDTO, file);
@@ -104,7 +104,7 @@ namespace BookStoreApi.Test
                 IFormFile file = new FormFile(stream, 1, stream.Length, "", fileName);
 
             _mockIMapper.Setup(x => x.Map(bookDTO, newBook));
-            _mockBookService.Setup(x => x.ValidateBook(newBook.ID, newBook.BookName)).ReturnsAsync(() => null);
+            _mockBookService.Setup(x => x.ValidateBook(newBook.Id, newBook.BookName)).ReturnsAsync(() => null);
             _mockCategoryService.Setup(x => x.GetCategoryById(newBook.CategoryId)).ReturnsAsync(category);
 
              CategoryShow categoryShow = new CategoryShow();

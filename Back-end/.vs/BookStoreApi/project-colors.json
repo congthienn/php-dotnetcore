@@ -20,7 +20,12 @@
       "ProjectGuid": "22b63f16-10ab-4296-9851-bc58dfc45088",
       "DisplayName": "WinFormsBookStore",
       "ColorIndex": 2
+    },
+    "24d96354-1352-4060-9e4c-330abc889041": {
+      "ProjectGuid": "24d96354-1352-4060-9e4c-330abc889041",
+      "DisplayName": "SqlServerMigrations",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }

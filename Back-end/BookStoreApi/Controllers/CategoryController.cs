@@ -13,20 +13,18 @@ namespace BookStoreApi.Controllers
         private readonly IBookService _booksService;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
-        private readonly ILogService _logsService;
-        public CategoryController(ICategoryService categoryService,IBookService booksService,IMapper mapper,ILogger<CategoryController> logger,ILogService logsService)
+        public CategoryController(ICategoryService categoryService,IBookService booksService,IMapper mapper,ILogger<CategoryController> logger)
         {
             _categoryService = categoryService;
             _booksService = booksService;
             _mapper = mapper;
             _logger = logger;
-            _logsService = logsService;
         }
         [HttpGet]
         public async Task<IEnumerable<Category>> GetCategory() {
             this._logger.LogInformation(MyLogEvents.ListItems,"{e} - Run api: https://localhost:44313/api/category",MyLogEventTitle.ListItems);
             IEnumerable<Category> listCategory = await this._categoryService.GetCategory();
-            await this._logsService.CreateLog((int)LogLevel.Information, Method.GET, "https://localhost:44313/api/category",null,"Get list category success",null);
+            
             return listCategory;
         }
         [HttpGet("{id}")]
@@ -38,11 +36,9 @@ namespace BookStoreApi.Controllers
             {
                 ModelState.AddModelError("Error", "Category not found");
                 this._logger.LogWarning(MyLogEvents.Error,"{e} - Category not found",MyLogEventTitle.Error);
-                await this._logsService.CreateLog((int)LogLevel.Warning, Method.GET, $"https://localhost:44313/api/category/{id}", null, "Category not found",null);
                 return BadRequest(ModelState);
             }
             this._logger.LogInformation(MyLogEvents.GetItem,"{e} - Output: {output}", MyLogEventTitle.GetItem, MyLogEvents.ShowObject(findCategory));
-            await this._logsService.CreateLog((int)LogLevel.Information, Method.GET, $"https://localhost:44313/api/category/{id}", null, "Get category by id success", MyLogEvents.ShowObject(findCategory));
             return Ok(findCategory);
         }
         [HttpPost]
@@ -57,12 +53,10 @@ namespace BookStoreApi.Controllers
             {
                 ModelState.AddModelError("Error", "Category is exist");
                 this._logger.LogWarning(MyLogEvents.Error, "{e} - Category is exist", MyLogEventTitle.Error);
-                await this._logsService.CreateLog((int)LogLevel.Warning, Method.POST, $"https://localhost:44313/api/category", MyLogEvents.ShowObject(createCategory), "Category is exist",null);
                 return BadRequest(ModelState);
             }
             await this._categoryService.CreateCategory(newCategory);
             this._logger.LogInformation(MyLogEvents.InsertItem, "{e} - Output: {output}", MyLogEventTitle.InsertItem, MyLogEvents.ShowObject(newCategory));
-            await this._logsService.CreateLog((int)LogLevel.Information, Method.POST, $"https://localhost:44313/api/category", MyLogEvents.ShowObject(createCategory), "Create category success",MyLogEvents.ShowObject(newCategory));
             return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
         }
         [HttpDelete("{id}")]
@@ -74,7 +68,7 @@ namespace BookStoreApi.Controllers
             {
                 ModelState.AddModelError("Error", "Category not found");
                 this._logger.LogWarning(MyLogEvents.Error, "{e} - Category not found", MyLogEventTitle.Error);
-                await this._logsService.CreateLog((int)LogLevel.Warning, Method.DELETE, $"https://localhost:44313/api/category/{id}", id, "Category not found", null);
+               
                 return BadRequest(ModelState);
             }
             var listCategory = await this._booksService.ListBookByCategoryId(findCategory.Id);
@@ -84,10 +78,10 @@ namespace BookStoreApi.Controllers
                 {
                     book.CategoryId = null;
                     //book.Category = null;
-                    await this._booksService.UpdateAsync(book.ID, book);
+                    await this._booksService.UpdateAsync(book.Id, book);
                 }
             }
-            await this._logsService.CreateLog((int)LogLevel.Information, Method.DELETE, $"https://localhost:44313/api/category/{id}",id, "Delete category success", null);
+           
             await this._categoryService.DeleteCategory(findCategory.Id);
             return NoContent();
         }
@@ -101,7 +95,7 @@ namespace BookStoreApi.Controllers
             {
                 ModelState.AddModelError("Error", "Category not found");
                 this._logger.LogWarning(MyLogEvents.Error, "{e} - Category not found", MyLogEventTitle.Error);
-                await this._logsService.CreateLog((int)LogLevel.Warning, Method.PUT, $"https://localhost:44313/api/category/{id}", MyLogEvents.ShowObject(updateCategory), "Category not found", null);
+               
                 return BadRequest(ModelState);
             }
             IEnumerable<Category> validateCategory = await this._categoryService.ValidateCategory(findCategory.Id,updateCategory.Name);
@@ -109,7 +103,7 @@ namespace BookStoreApi.Controllers
             {
                 ModelState.AddModelError("Error", "Category is exist");
                 this._logger.LogWarning(MyLogEvents.Error, "{e} - Category is exist", MyLogEventTitle.Error);
-                await this._logsService.CreateLog((int)LogLevel.Warning, Method.PUT, $"https://localhost:44313/api/category/{id}", MyLogEvents.ShowObject(updateCategory), "Category is exist", null);
+
                 return BadRequest(ModelState);
             }
             this._mapper.Map(updateCategory,findCategory);
@@ -120,12 +114,11 @@ namespace BookStoreApi.Controllers
                 foreach (Book book in listBook)
                 {
                     //book.Category = category;
-                    await this._booksService.UpdateAsync(book.ID, book);
+                    await this._booksService.UpdateAsync(book.Id, book);
                 }
             }
             await this._categoryService.UpdateCategory(findCategory.Id, findCategory);
             this._logger.LogInformation(MyLogEvents.UpdateItem, "{e} - Output: {output}", MyLogEventTitle.UpdateItem, MyLogEvents.ShowObject(findCategory));
-            await this._logsService.CreateLog((int)LogLevel.Information, Method.PUT, $"https://localhost:44313/api/category/{id}", MyLogEvents.ShowObject(updateCategory), "Update category success", MyLogEvents.ShowObject(findCategory));
             return CreatedAtAction(nameof(GetCategoryById), new { id = findCategory.Id }, findCategory);
         }
     }
