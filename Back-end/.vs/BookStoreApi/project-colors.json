@@ -25,7 +25,27 @@
       "ProjectGuid": "24d96354-1352-4060-9e4c-330abc889041",
       "DisplayName": "SqlServerMigrations",
       "ColorIndex": 3
+    },
+    "713ab9e3-65d5-4837-ab79-6ecf8cd1f1ab": {
+      "ProjectGuid": "713ab9e3-65d5-4837-ab79-6ecf8cd1f1ab",
+      "DisplayName": "LibraryAbstractDBProvider",
+      "ColorIndex": 4
+    },
+    "c6474aba-aff3-48f0-b223-bb798e02bdc6": {
+      "ProjectGuid": "c6474aba-aff3-48f0-b223-bb798e02bdc6",
+      "DisplayName": "PostgreSQLMigrations",
+      "ColorIndex": 5
+    },
+    "306cb280-efc9-4f35-b9da-4a20ca1330ec": {
+      "ProjectGuid": "306cb280-efc9-4f35-b9da-4a20ca1330ec",
+      "DisplayName": "LibraryFactoryDBProvider",
+      "ColorIndex": 6
+    },
+    "1350ce17-ec0b-4a12-a0ad-5f5cb27d134c": {
+      "ProjectGuid": "1350ce17-ec0b-4a12-a0ad-5f5cb27d134c",
+      "DisplayName": "BookStoreDesktop",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 8
 }

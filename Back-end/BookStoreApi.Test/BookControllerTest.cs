@@ -13,6 +13,7 @@ using MongoDB.Bson;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BookStoreApi.Test
 {
@@ -22,9 +23,10 @@ namespace BookStoreApi.Test
         private readonly Mock<IBookService> _mockBookService = new Mock<IBookService>();
         private readonly Mock<ICategoryService> _mockCategoryService = new Mock<ICategoryService>();
         private readonly Mock<IMapper> _mockIMapper = new Mock<IMapper>();
+        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
         public BookControllerTest()
         {
-            _sut = new BookController(_mockBookService.Object, _mockCategoryService.Object, _mockIMapper.Object);
+            _sut = new BookController(_mockBookService.Object, _mockCategoryService.Object, _mockIMapper.Object,_memoryCache.Object);
         }
         [Fact]
         public async Task GetBookById_NotFound()

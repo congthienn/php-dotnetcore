@@ -41,7 +41,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddResponseCaching();
+builder.Services.AddMemoryCache();
 //Add JsonPatch
 builder.Services.AddControllers().AddNewtonsoftJson();
 

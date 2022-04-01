@@ -12,6 +12,7 @@ using AutoMapper;
 using Xunit;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BookStoreApi.Test
 {
@@ -22,9 +23,10 @@ namespace BookStoreApi.Test
         private readonly Mock<IBookService> _mockBookService = new Mock<IBookService>();
         private readonly Mock<IMapper> _mockIMapper = new Mock<IMapper>();
         private readonly Mock<IBillDetailService> _billDetailService = new Mock<IBillDetailService>();
+        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
         public BillControllerTest()
         {
-            _sut = new BillController(_mockBillService.Object, _mockBookService.Object,_mockIMapper.Object,_billDetailService.Object);
+            _sut = new BillController(_mockBillService.Object, _mockBookService.Object,_mockIMapper.Object,_billDetailService.Object,_memoryCache.Object);
         }
         [Fact]
         public async Task GetBillById_WhenNotFound()

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using BookStoreApi.Interfaces;
 using System.Net.Http.Headers;
+using Microsoft.Extensions.Caching.Memory;
+using BookStoreApi.MemoryCaches;
 
 namespace BookStoreApi.Controllers
 {
@@ -15,6 +17,7 @@ namespace BookStoreApi.Controllers
         private readonly IBookService _bookService;
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
         private static void MergeChunks(string chunk1, string chunk2)
         {
             FileStream fs1 = null;
@@ -38,16 +41,26 @@ namespace BookStoreApi.Controllers
                 System.IO.File.Delete(chunk2);
             }
         }
-        public BookController(IBookService booksService,ICategoryService categoryService,IMapper mapper)
+        public BookController(IBookService booksService,ICategoryService categoryService,IMapper mapper,IMemoryCache memoryCache)
         {
             _bookService = booksService;
             _categoryService = categoryService;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IEnumerable<Book>> GetListBook()
         {
-            return await this._bookService.GetAsync();
+            string cacheKey = "listBook";
+            bool checkMemoryCacheAction = Memorycache.CheckMemoryCacheAction(this._memoryCache);
+            bool checkMemoryCacheListBook = this._memoryCache.TryGetValue(cacheKey, out IEnumerable<Book> listBook);
+            if(checkMemoryCacheAction || !checkMemoryCacheListBook)
+            {
+                listBook = await this._bookService.GetAsync();
+                this._memoryCache.Set(cacheKey, listBook,Memorycache.SetMemoryCache());
+                Memorycache.RemoveMemoryCacheAction(this._memoryCache);
+            }
+            return listBook;
         }
         [HttpGet("detail/{id}")]
         public async Task<ActionResult<Book>> GetItemBook(string id)
@@ -98,6 +111,7 @@ namespace BookStoreApi.Controllers
             //newBook.Category = category;
             newBook.ImagePath = fileName;
             await this._bookService.CreateAsync(newBook);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetItemBook), new { id = newBook.Id }, newBook);
         }
         [HttpGet("image/{dbPath}")]
@@ -169,6 +183,7 @@ namespace BookStoreApi.Controllers
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
             //book.Category = category;
             await this._bookService.UpdateAsync(book.Id, book);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetItemBook), new { id = book.Id}, book);
         }
         [HttpDelete("{id}")]
@@ -194,6 +209,7 @@ namespace BookStoreApi.Controllers
                 await this._bookService.DeleteAsync(id);
                 System.IO.File.Delete(pathToFile);
             }
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return NoContent();
         }
         [HttpPatch("{id}")]
@@ -237,39 +253,8 @@ namespace BookStoreApi.Controllers
             CategoryShow category = this._mapper.Map<CategoryShow>(findCategory);
             //findBook.Category = category;
             await this._bookService.UpdateAsync(findBook.Id, findBook);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetItemBook), new { id = findBook.Id }, findBook);
-        }
-        [HttpPost("upload")]
-        [RequestFormLimits(MultipartBodyLengthLimit = 1073741824)]
-        public async Task<IActionResult> UploadFile(IFormFile file)
-        {
-            var pathFolder = Path.Combine("wwwroot", "Temp");
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), pathFolder);
-            var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var pathFull = Path.Combine(pathToSave, fileName);
-            if(file.Length <= 0)
-            {
-                return BadRequest();
-            }
-            using(var stream = System.IO.File.Create(pathFull))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return Ok(file);
-        }
-        [HttpPost("filemerge/{fileName}")]
-        
-        public async Task<IActionResult> FileMerge(string fileName)
-        {
-            string tempPath = Path.Combine("wwwroot","Temp");
-            string pathFolder = Path.Combine("wwwroot", "Images");
-            string newPath = Path.Combine(pathFolder, fileName);
-            string[] filePaths = Directory.GetFiles(tempPath,fileName+"*");
-            foreach (string filePath in filePaths)
-            {
-                MergeChunks(newPath, filePath);
-            }
-            return Ok(fileName);
         }
     }
 }

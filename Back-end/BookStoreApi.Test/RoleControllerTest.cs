@@ -9,6 +9,7 @@ using Xunit;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BookStoreApi.Test
 {
@@ -18,9 +19,10 @@ namespace BookStoreApi.Test
         private readonly Mock<IUserService> _mockUserService = new Mock<IUserService>();
         private readonly Mock<IRoleService> _mockRoleService = new Mock<IRoleService>();
         private readonly Mock<IMapper> _mockIMapper = new Mock<IMapper>();
+        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
         public RoleControllerTest()
         {
-            _sut = new RoleController(_mockRoleService.Object, _mockUserService.Object, _mockIMapper.Object);
+            _sut = new RoleController(_mockRoleService.Object, _mockUserService.Object, _mockIMapper.Object,_memoryCache.Object);
         }
         //Get
         [Fact]

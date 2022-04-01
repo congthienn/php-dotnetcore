@@ -8,14 +8,11 @@ namespace BookStoreApi.RepositoryPattern
             string databaseDefault = GetStringAppsetting.DatabaseDefault();
             try
             {
-                if (databaseDefault == "MongoDB")
+                if (databaseDefault.Equals("MongoDB"))
                 {
                     return new UnitOfWorkMongoDB();
                 }
-                else
-                {
-                    return new UnitOfWorkSQL();
-                }
+                return new UnitOfWorkSQL();
             }
             catch
             {

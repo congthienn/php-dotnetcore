@@ -10,7 +10,7 @@
             "Address" => $_POST["address"]
         );
         $headers = array("Content-Type: application/json");
-        $result = CallAPI($request,"PUT",json_encode($data),$headers);
+        $result = CallAPI($request,"PUT",json_encode($data_array),$headers);
         if(isset($result["Error"]) || isset($result["errors"])){
             print_r($result);
         }else{

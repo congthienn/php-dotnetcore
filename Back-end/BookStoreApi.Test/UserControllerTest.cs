@@ -12,6 +12,7 @@ using Xunit;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BookStoreApi.Test
 {
@@ -21,9 +22,10 @@ namespace BookStoreApi.Test
         private readonly Mock<IUserService> _mockUserService = new Mock<IUserService>();
         private readonly Mock<IRoleService> _mockRoleService = new Mock<IRoleService>();
         private readonly Mock<IMapper> _mockIMapper = new Mock<IMapper>();
+        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
         public UserControllerTest()
         {
-            _sut = new UserController(_mockUserService.Object, _mockRoleService.Object,_mockIMapper.Object);
+            _sut = new UserController(_mockUserService.Object, _mockRoleService.Object,_mockIMapper.Object,_memoryCache.Object);
         }
         //Get
         [Fact]

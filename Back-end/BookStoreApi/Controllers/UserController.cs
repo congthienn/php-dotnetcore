@@ -4,6 +4,9 @@ using BookStoreApi.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using BookStoreApi.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
+using BookStoreApi.MemoryCaches;
+
 namespace BookStoreApi.Controllers
 {
     [ApiController]
@@ -13,15 +16,27 @@ namespace BookStoreApi.Controllers
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
-
-        public UserController(IUserService userService,IRoleService roleService,IMapper mapper)
+        private readonly IMemoryCache _memoryCache;
+        public UserController(IUserService userService,IRoleService roleService,IMapper mapper,IMemoryCache memoryCache)
         {
             _userService = userService;
             _roleService = roleService;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
         [HttpGet]
-        public async Task<IEnumerable<User>> GetUser() => await this._userService.GetUserAsync();
+        public async Task<IEnumerable<User>> GetUser() {
+            string cacheKey = "listUser";
+            bool checkMemoryCacheAction = Memorycache.CheckMemoryCacheAction(this._memoryCache); 
+            bool checkMemoryCacheListUser = this._memoryCache.TryGetValue(cacheKey, out IEnumerable<User> listUser);
+            if(checkMemoryCacheAction || !checkMemoryCacheListUser)
+            {
+                listUser = await this._userService.GetUserAsync();
+                this._memoryCache.Set(cacheKey, listUser,Memorycache.SetMemoryCache());
+                Memorycache.RemoveMemoryCacheAction(this._memoryCache);
+            }
+            return listUser;
+        } 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(string id){
             var user = await this._userService.GetUserAsync(id);
@@ -65,6 +80,7 @@ namespace BookStoreApi.Controllers
             findRole.Quantity += 1;
             await this._roleService.UpdateRoleById(findRole.Id, findRole);
             await this._userService.CreateUserAsync(newUser);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetUserById), new { id = newUser.Id }, newUser);
         }
         [HttpDelete("{id}")]
@@ -83,6 +99,7 @@ namespace BookStoreApi.Controllers
                 await this._roleService.UpdateRoleById(findRole.Id, findRole);
             }
             await this._userService.DeleteUserAsync(id);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return NoContent();
 
         }
@@ -112,7 +129,6 @@ namespace BookStoreApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-           
             if(findRole.Id != findUser.RoleId)
             {
                 if(findUser.RoleId != null)
@@ -128,6 +144,7 @@ namespace BookStoreApi.Controllers
             RoleShow roleShow = this._mapper.Map<RoleShow>(findRole);
             //findUser.Role = roleShow;
             await this._userService.UpdateUserAsync(findUser.Id, findUser);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetUserById), new { id = findUser.Id }, findUser);
         }
         [HttpPatch("{id}")]
@@ -173,6 +190,7 @@ namespace BookStoreApi.Controllers
             RoleShow roleShow = this._mapper.Map<RoleShow>(findRole);
             //findUser.Role = roleShow;
             await this._userService.UpdateUserAsync(findUser.Id,findUser);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetUserById), new { id = findUser.Id }, findUser);
         }
     }

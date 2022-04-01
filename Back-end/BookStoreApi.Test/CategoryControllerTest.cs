@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using BookStoreApi.Interfaces;
 using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BookStoreApi.Test
 {
@@ -20,9 +21,10 @@ namespace BookStoreApi.Test
         private readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
         private readonly Mock<IBookService> _mockBookService = new Mock<IBookService>();
         private readonly Mock<ILogger<CategoryController>> _mockLogger = new Mock<ILogger<CategoryController>>();
+        private readonly Mock<IMemoryCache> _memoryCache = new Mock<IMemoryCache>();
         public CategoryControllerTest()
         {
-            _testController = new CategoryController(_mockCategoryService.Object, _mockBookService.Object, _mockMapper.Object, _mockLogger.Object);
+            _testController = new CategoryController(_mockCategoryService.Object, _mockBookService.Object, _mockMapper.Object, _mockLogger.Object,_memoryCache.Object);
         }
         //Get
         [Fact]

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UsUu5lfSun6Bai32gJbreJlCEzf5vEOJbd8YgFgyMGs=",
+  "Hash": "IX4A7MfAyG79ca+W++0zAIngK7gq1dxXqt5uwZBVhUE=",
   "Source": "BookStoreApi",
   "BasePath": "_content/BookStoreApi",
   "Mode": "Default",
@@ -34,12 +34,12 @@
       "OriginalItemSpec": "wwwroot\\Images\\l2xetegk.maz"
     },
     {
-      "Identity": "D:\\xampp\\htdocs\\php-dotnetcore\\Back-end\\BookStoreApi\\wwwroot\\Images\\ojaz5s2g.cgn",
+      "Identity": "D:\\xampp\\htdocs\\php-dotnetcore\\Back-end\\BookStoreApi\\wwwroot\\Images\\utz0qxuy.0lx",
       "SourceId": "BookStoreApi",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\xampp\\htdocs\\php-dotnetcore\\Back-end\\BookStoreApi\\wwwroot\\",
       "BasePath": "_content/BookStoreApi",
-      "RelativePath": "Images/ojaz5s2g.cgn",
+      "RelativePath": "Images/utz0qxuy.0lx",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,7 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\ojaz5s2g.cgn"
+      "OriginalItemSpec": "wwwroot\\Images\\utz0qxuy.0lx"
     },
     {
       "Identity": "D:\\xampp\\htdocs\\php-dotnetcore\\Back-end\\BookStoreApi\\wwwroot\\Images\\z14z4bjt.ow1",

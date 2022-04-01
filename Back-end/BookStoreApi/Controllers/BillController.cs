@@ -4,6 +4,9 @@ using BookStoreApi.Models;
 using BookStoreApi.Interfaces;
 using System.Linq;
 using AutoMapper;
+using Microsoft.Extensions.Caching.Memory;
+using BookStoreApi.MemoryCaches;
+
 namespace BookStoreApi.Controllers
 {
     [ApiController]
@@ -14,15 +17,29 @@ namespace BookStoreApi.Controllers
         private readonly IBookService _booksService;
         private readonly IMapper _mapper;
         private readonly IBillDetailService _billDetailService;
-        public BillController(IBillService billService,IBookService booksService,IMapper mapper,IBillDetailService billDetailService)
+        private readonly IMemoryCache _memoryCache;
+        public BillController(IBillService billService,IBookService booksService,IMapper mapper,IBillDetailService billDetailService,IMemoryCache memoryCache)
         {
             _billService = billService;
             _booksService = booksService;
             _mapper = mapper;
             _billDetailService = billDetailService;
+            _memoryCache = memoryCache;
         }
         [HttpGet]
-        public async Task<IEnumerable<Bill>> GetAll() => await this._billService.GetBills();
+        public async Task<IEnumerable<Bill>> GetAll() {
+            string cacheKey = "listBill";
+            bool checkMemoryCacheAction = Memorycache.CheckMemoryCacheAction(this._memoryCache);
+            bool checkMemoryCacheListBill = this._memoryCache.TryGetValue(cacheKey, out IEnumerable<Bill> listBill);
+            if(checkMemoryCacheAction || !checkMemoryCacheListBill)
+            {
+                listBill = await this._billService.GetBills();
+                this._memoryCache.Set(cacheKey, listBill, Memorycache.SetMemoryCache());
+                Memorycache.RemoveMemoryCacheAction(this._memoryCache);
+            }
+            return listBill;
+            
+        } 
         [HttpGet("{id}")]
         public async Task<ActionResult<Bill>> GetBillById(string id)
         {
@@ -87,6 +104,7 @@ namespace BookStoreApi.Controllers
             }
             newBill.Value = sumBill;
             this._billService.UpdateBill(newBill.Id, newBill);
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetBillById), new {id = newBill.Id},newBill);
         }
     }

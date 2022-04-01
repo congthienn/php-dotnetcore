@@ -5,7 +5,8 @@
             "BookId" => $_POST["Id"],
             "Quantity" => $_POST["Quantity"],
         );
-        $result = CallAPI("bill","POST",$data_array);
+        $header = array("Content-Type: multipart/form-data");
+        $result = CallAPI("bill","POST",json_encode($data_array));
         if(isset($result["Error"]) || isset($result["errors"])){
             print_r($result);
         }else{

@@ -3,6 +3,8 @@ using BookStoreApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using BookStoreApi.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
+using BookStoreApi.MemoryCaches;
 namespace BookStoreApi.Controllers
 {
     [ApiController]
@@ -13,18 +15,27 @@ namespace BookStoreApi.Controllers
         private readonly IBookService _booksService;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
-        public CategoryController(ICategoryService categoryService,IBookService booksService,IMapper mapper,ILogger<CategoryController> logger)
+        private readonly IMemoryCache _memoryCache;
+        public CategoryController(ICategoryService categoryService,IBookService booksService,IMapper mapper,ILogger<CategoryController> logger,IMemoryCache memoryCache)
         {
             _categoryService = categoryService;
             _booksService = booksService;
             _mapper = mapper;
             _logger = logger;
+            _memoryCache = memoryCache;
         }
         [HttpGet]
         public async Task<IEnumerable<Category>> GetCategory() {
-            this._logger.LogInformation(MyLogEvents.ListItems,"{e} - Run api: https://localhost:44313/api/category",MyLogEventTitle.ListItems);
-            IEnumerable<Category> listCategory = await this._categoryService.GetCategory();
-            
+            string cacheKey = "listCategory";
+            bool checkcacheAction = Memorycache.CheckMemoryCacheAction(this._memoryCache);
+            bool checkcacheListCategory = this._memoryCache.TryGetValue(cacheKey, out IEnumerable<Category> listCategory);
+            if ( checkcacheAction || !checkcacheListCategory)
+            {
+                this._logger.LogInformation(MyLogEvents.ListItems, "{e} - Run api: https://localhost:44313/api/category", MyLogEventTitle.ListItems);
+                listCategory = await this._categoryService.GetCategory();
+                _memoryCache.Set(cacheKey, listCategory,Memorycache.SetMemoryCache());
+                Memorycache.RemoveMemoryCacheAction(this._memoryCache);
+            }
             return listCategory;
         }
         [HttpGet("{id}")]
@@ -57,6 +68,8 @@ namespace BookStoreApi.Controllers
             }
             await this._categoryService.CreateCategory(newCategory);
             this._logger.LogInformation(MyLogEvents.InsertItem, "{e} - Output: {output}", MyLogEventTitle.InsertItem, MyLogEvents.ShowObject(newCategory));
+            //Memory Cache
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return CreatedAtAction(nameof(GetCategoryById), new { id = newCategory.Id }, newCategory);
         }
         [HttpDelete("{id}")]
@@ -71,18 +84,19 @@ namespace BookStoreApi.Controllers
                
                 return BadRequest(ModelState);
             }
-            var listCategory = await this._booksService.ListBookByCategoryId(findCategory.Id);
-            if(listCategory.Count() > 0)
+            var listBook = await this._booksService.ListBookByCategoryId(findCategory.Id);
+            if(listBook.Count() > 0)
             {
-                foreach (Book book in listCategory)
+                foreach (Book book in listBook)
                 {
                     book.CategoryId = null;
                     //book.Category = null;
                     await this._booksService.UpdateAsync(book.Id, book);
                 }
             }
-           
             await this._categoryService.DeleteCategory(findCategory.Id);
+            //Memory Cache
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
             return NoContent();
         }
         [HttpPut("{id}")]
@@ -119,6 +133,9 @@ namespace BookStoreApi.Controllers
             }
             await this._categoryService.UpdateCategory(findCategory.Id, findCategory);
             this._logger.LogInformation(MyLogEvents.UpdateItem, "{e} - Output: {output}", MyLogEventTitle.UpdateItem, MyLogEvents.ShowObject(findCategory));
+            //Memory Cache
+            Memorycache.SetMemoryCacheAction(this._memoryCache);
+
             return CreatedAtAction(nameof(GetCategoryById), new { id = findCategory.Id }, findCategory);
         }
     }

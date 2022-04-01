@@ -13,10 +13,10 @@ namespace BookStoreApi.Services
             this._unitOfWork = GetUnitOfWork.UnitOfWork();
         }
         public async Task<IEnumerable<Category>> GetCategory() => await this._unitOfWork.CategoryRepository.Get();
-        public virtual async Task<Category?> GetCategoryById(string id) => await this._unitOfWork.CategoryRepository.GetByID(id);
+        public async Task<Category?> GetCategoryById(string id) => await this._unitOfWork.CategoryRepository.GetByID(id);
         public async Task CreateCategory(Category newCategory) => await this._unitOfWork.CategoryRepository.Insert(newCategory);
-        public virtual async Task UpdateCategory(string id,Category updateCategory) => await this._unitOfWork.CategoryRepository.Update(updateCategory);
-        public virtual async Task DeleteCategory(string id) => await this._unitOfWork.CategoryRepository.Delete(id);
-        public virtual async Task<IEnumerable<Category>> ValidateCategory(string id, string name) => await this._unitOfWork.CategoryRepository.Get(x=>x.Id != id && x.Name == name);
+        public async Task UpdateCategory(string id,Category updateCategory) => await this._unitOfWork.CategoryRepository.Update(updateCategory);
+        public async Task DeleteCategory(string id) => await this._unitOfWork.CategoryRepository.Delete(id);
+        public async Task<IEnumerable<Category>> ValidateCategory(string id, string name) => await this._unitOfWork.CategoryRepository.Get(x=>x.Id != id && x.Name == name);
     }
 }
