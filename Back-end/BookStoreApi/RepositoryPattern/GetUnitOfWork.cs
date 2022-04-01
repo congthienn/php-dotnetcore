@@ -1,18 +1,18 @@
 ﻿using LibraryAbstractDBProvider;
 namespace BookStoreApi.RepositoryPattern
 {
-    public class GetUnitOfWork
+    public class GetUnitOfWork<TEntity> where TEntity : class
     {
-        public static IUnitOfWork UnitOfWork()
+        public static IUnitOfWork<TEntity> UnitOfWork()
         {
             string databaseDefault = GetStringAppsetting.DatabaseDefault();
             try
             {
                 if (databaseDefault.Equals("MongoDB"))
                 {
-                    return new UnitOfWorkMongoDB();
+                    return new UnitOfWorkMongoDB<TEntity>();
                 }
-                return new UnitOfWorkSQL();
+                return new UnitOfWorkSQL<TEntity>();
             }
             catch
             {

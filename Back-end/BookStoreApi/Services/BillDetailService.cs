@@ -5,11 +5,11 @@ namespace BookStoreApi.Services
 {
     public class BillDetailService : IBillDetailService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork<BillDetail> _unitOfWork;
         public BillDetailService()
         {
-            this._unitOfWork = GetUnitOfWork.UnitOfWork();
+            this._unitOfWork = GetUnitOfWork<BillDetail>.UnitOfWork();
         }
-        public async Task AddBill(BillDetail billDetail) => await this._unitOfWork.BillDetailRepository.Insert(billDetail);
+        public async Task AddBill(BillDetail billDetail) => await this._unitOfWork.Repository.Insert(billDetail);
     }
 }

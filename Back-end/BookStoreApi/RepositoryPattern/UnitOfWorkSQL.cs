@@ -4,80 +4,37 @@ using LibraryAbstractDBProvider.DBContext;
 
 namespace BookStoreApi.RepositoryPattern
 {
-    public class UnitOfWorkSQL : AbstractUnitOfWork
+    public class UnitOfWorkSQL<TEntity> : AbstractUnitOfWork<TEntity>, IDisposable where TEntity : class
     {
         private SQLContext _context = new SQLContext();
-        private GenericRepositorySQL<Category> _categoryRepository;
-        private GenericRepositorySQL<Role> _roleRepository;
-        private GenericRepositorySQL<User> _userRepository;
-        private GenericRepositorySQL<Book> _bookRepository;
-        private GenericRepositorySQL<Bill> _billRepository;
-        private GenericRepositorySQL<BillDetail> _billDetailRepository;
-        public override GenericRepositorySQL<Category> CategoryRepository
+        private GenericRepositorySQL<TEntity> _repository;
+        public override GenericRepositorySQL<TEntity> Repository
         {
             get
             {
-                if(this._categoryRepository == null)
+                if(this._repository is null)
                 {
-                    this._categoryRepository = new GenericRepositorySQL<Category>(_context);
+                    this._repository = new GenericRepositorySQL<TEntity>(_context);
                 }
-                return this._categoryRepository;
+                return this._repository;
             }
         }
-        public override GenericRepositorySQL<Role> RoleRepository
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
         {
-            get
+            if (!this.disposed)
             {
-                if(this._roleRepository == null)
+                if (disposing)
                 {
-                    this._roleRepository = new GenericRepositorySQL<Role>(_context);
+                    _context.Dispose();
                 }
-                return this._roleRepository;
             }
+            this.disposed = true;
         }
-        public override GenericRepositorySQL<User> UserRepository
+        public void Dispose()
         {
-            get
-            {
-                if(this._userRepository == null)
-                {
-                    this._userRepository = new GenericRepositorySQL<User>(_context);
-                }
-                return this._userRepository;
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
-        public override GenericRepositorySQL<Book> BookRepository
-        {
-            get
-            {
-                if(this._bookRepository == null)
-                {
-                    this._bookRepository = new GenericRepositorySQL<Book>(_context);
-                }
-                return this._bookRepository;
-            }
-        }
-        public override GenericRepositorySQL<Bill> BillRepository
-        {
-            get
-            {
-                if(this._billRepository == null)
-                {
-                    return this._billRepository = new GenericRepositorySQL<Bill>(_context);
-                }
-                return this._billRepository;
-            }
-        }
-        public override GenericRepositorySQL<BillDetail> BillDetailRepository
-        {
-            get
-            {
-                if(this._billDetailRepository == null)
-                {
-                    return this._billDetailRepository = new GenericRepositorySQL<BillDetail>(_context);
-                }
-                return this._billDetailRepository;
-            }
-        } 
     }
 }
