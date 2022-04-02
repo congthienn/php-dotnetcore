@@ -29,7 +29,7 @@ namespace BookStoreApi.Controllers
             string cacheKey = "listCategory";
             bool checkcacheAction = Memorycache.CheckMemoryCacheAction(this._memoryCache);
             bool checkcacheListCategory = this._memoryCache.TryGetValue(cacheKey, out IEnumerable<Category> listCategory);
-            if ( checkcacheAction || !checkcacheListCategory)
+            if (checkcacheAction || !checkcacheListCategory)
             {
                 this._logger.LogInformation(MyLogEvents.ListItems, "{e} - Run api: https://localhost:44313/api/category", MyLogEventTitle.ListItems);
                 listCategory = await this._categoryService.GetCategory();
