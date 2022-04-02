@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LibraryAbstractDBProvider\LibraryAbstractDBProvider\LibraryAbstractDBProvider.csproj" />
+    <ProjectReference Include="..\..\Back-end\LibraryAbstractDBProvider\LibraryAbstractDBProvider\LibraryAbstractDBProvider.csproj" />
   </ItemGroup>
 
 	<ItemGroup>

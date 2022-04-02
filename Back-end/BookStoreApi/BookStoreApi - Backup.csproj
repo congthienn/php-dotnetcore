@@ -38,8 +38,4 @@
     <Folder Include="wwwroot\Files\" />
     <Folder Include="wwwroot\Temp\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\LibraryAbstractDBProvider\LibraryAbstractDBProvider\LibraryAbstractDBProvider.csproj" />
-  </ItemGroup>
 </Project>
